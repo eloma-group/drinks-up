@@ -11,7 +11,8 @@ import './Hero.css';
 const LINES = [['Tired', 'of'], ['boring'], ['drinks?']];
 
 function Badge() {
-  const text = `Australian owned · Free shipping over ${money(SITE.freeShippingThreshold).replace('.00', '')} · `;
+  // Brand line from the store's About page
+  const text = 'Australian owned · Good times & better booze · ';
   return (
     <div className="hero__badge" aria-hidden="true">
       <svg viewBox="0 0 200 200" className="hero__badge-ring">
