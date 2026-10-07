@@ -34,7 +34,7 @@ export function useSeo({ title, description = DEFAULT_DESC, image, path, type = 
     setMeta('property', 'og:description', description);
     setMeta('property', 'og:type', type);
     setMeta('property', 'og:url', url);
-    if (image) setMeta('property', 'og:image', image);
+    if (image) setMeta('property', 'og:image', image.startsWith('/') ? SITE.url + image : image);
     setMeta('name', 'twitter:card', image ? 'summary_large_image' : 'summary');
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');

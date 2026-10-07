@@ -1,8 +1,19 @@
 import catalogue from './catalogue.json';
 import { IMG } from './site';
-import type { Brand, CategoryKey, Collection, Policy, Product, Recipe } from '../types';
+import type { Brand, CategoryKey, Collection, Policy, Product, ProductImage, Recipe } from '../types';
 
-export const products = catalogue.products as Product[];
+/**
+ * Local photography that should lead a product's gallery everywhere it appears
+ * (cards, product page, search, cart, quick view). Kept here, not in
+ * catalogue.json, so it survives `npm run sync:catalogue`.
+ */
+const IMAGE_OVERRIDES: Record<string, ProductImage> = {
+  'burnt-ends': { src: IMG.burntEndsFeature, width: 1254, height: 1254 },
+};
+
+export const products = (catalogue.products as Product[]).map((p) =>
+  IMAGE_OVERRIDES[p.handle] ? { ...p, images: [IMAGE_OVERRIDES[p.handle], ...p.images] } : p,
+);
 export const recipes = catalogue.recipes as Recipe[];
 export const policies = catalogue.policies as Record<string, Policy>;
 export const syncedAt = catalogue.syncedAt;
@@ -97,7 +108,7 @@ export const categoryCount = (key: CategoryKey) => products.filter((p) => p.cate
 /* ---------- Collections (keep the store's URLs) ---------- */
 const BRAND_IMAGE: Record<string, string> = {
   'black-tears': IMG.blackTears,
-  'burnt-ends': IMG.burntEndsMood,
+  'burnt-ends': IMG.burntEndsFeature,
   'casa-san-matias': IMG.sanMatiasDark,
   'demonio-de-los-andes': IMG.elderflowerBar,
   giffard: IMG.spritzTable,

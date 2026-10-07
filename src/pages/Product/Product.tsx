@@ -84,7 +84,7 @@ function ProductView({ product }: { product: P }) {
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: product.title,
-      image: product.images.slice(0, 4).map((i) => i.src),
+      image: product.images.slice(0, 4).map((i) => (i.src.startsWith('/') ? SITE.url + i.src : i.src)),
       description: product.excerpt,
       sku: v.sku ?? undefined,
       brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,

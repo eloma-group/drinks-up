@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import { getProduct } from '../../../data';
-import { SPIRIT_OF_THE_MONTH as SOM } from '../../../data/site';
+import { SPIRIT_OF_THE_MONTH as SOM, IMG } from '../../../data/site';
+import { srcSet } from '../../../utils/image';
 import { shortTitle } from '../../../utils/format';
 import { ClipReveal, Reveal, SplitHeading } from '../../../animations/Reveal';
 import { BuyBox } from '../../../components/BuyBox/BuyBox';
@@ -18,8 +19,8 @@ export function SpiritOfMonth() {
           <ClipReveal className="som__photo">
             <img
               className="som__img"
-              src="/brand/burnt-ends-feature-1254.webp"
-              srcSet="/brand/burnt-ends-feature-800.webp 800w, /brand/burnt-ends-feature-1254.webp 1254w"
+              src={IMG.burntEndsFeature}
+              srcSet={srcSet(IMG.burntEndsFeature)}
               sizes="(min-width: 1000px) 45vw, 100vw"
               alt="Burnt Ends Blended Whiskey bottle beside a glass of whiskey on ice, with oak barrel and barley"
               width={1254}

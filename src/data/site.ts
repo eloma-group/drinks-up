@@ -63,6 +63,8 @@ export const IMG = {
   whiskeyRowBalcony: `${CDN}/files/704ff9_66373c555d574106b7a1fa4ea202a4d3_mv2.jpg`,
   blackTears: `${CDN}/files/blacktears-2-craftrumclub.jpg`,
   burntEndsMood: `${CDN}/products/BurntEnds1.jpg`,
+  /** Self-hosted Burnt Ends hero photo (see utils/image LOCAL_VARIANTS) */
+  burntEndsFeature: '/brand/burnt-ends-feature-1254.webp',
   puebloNeon: `${CDN}/products/2415673236023403516.jpg`,
   roseBar: `${CDN}/products/custom_resized_6dcd876a-5c21-43f4-92f3-ba7c814fb07c.jpg`,
   passionfruit: `${CDN}/products/2115695677389227813.jpg`,

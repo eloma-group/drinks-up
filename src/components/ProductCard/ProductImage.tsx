@@ -3,7 +3,7 @@ import { sized, srcSet } from '../../utils/image';
 import type { ProductImage as Img } from '../../types';
 
 /** PNG uploads on the store are white-background packshots; JPGs are lifestyle photos. */
-export const isPackshot = (img: Img) => /\.png($|\?)/i.test(img.src.split('?')[0]) || /\.webp/i.test(img.src);
+export const isPackshot = (img: Img) => !img.src.startsWith('/brand/') && (/\.png($|\?)/i.test(img.src.split('?')[0]) || /\.webp/i.test(img.src));
 
 interface Props {
   image: Img;
