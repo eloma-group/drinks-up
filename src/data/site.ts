@@ -69,6 +69,24 @@ export const IMG = {
   mintGlass: `${CDN}/products/2521433780226216817.jpg`,
 } as const;
 
+/** “You can find us at:” — venues & retailers from the store's homepage logo slider */
+export const STOCKISTS = [
+  { name: 'Savile Row', logo: '/stockists/savile-row.webp' },
+  { name: 'Foxtrot Unicorn', logo: '/stockists/foxtrot-unicorn.webp' },
+  { name: 'Crown', logo: '/stockists/crown.webp' },
+  { name: 'Howard Smith Wharves', logo: '/stockists/howard-smith-wharves.webp' },
+  { name: 'Arbory', logo: '/stockists/arbory.webp' },
+  { name: 'Gimlet', logo: '/stockists/gimlet.webp' },
+  { name: 'Naked for Satan', logo: '/stockists/naked-for-satan.webp' },
+  { name: 'Rockpool Bar & Grill', logo: '/stockists/rockpool-bar-grill.webp' },
+  { name: 'Maybe Sammy', logo: '/stockists/maybe-sammy.webp' },
+  { name: 'Liquor Barons', logo: '/stockists/liquor-barons.webp' },
+  { name: "Dan Murphy's", logo: '/stockists/dan-murphys.webp' },
+  { name: 'Australian Venue Co.', logo: '/stockists/australian-venue-co.webp' },
+  { name: 'Amazon', logo: '/stockists/amazon.webp' },
+  { name: 'Funlab', logo: '/stockists/funlab.webp' },
+] as const;
+
 /** The four promises from the original homepage slideshow */
 export const PILLARS = [
   {

@@ -2,7 +2,7 @@ import { useSeo } from '../../utils/seo';
 import { SITE, IMG } from '../../data/site';
 import { sized } from '../../utils/image';
 import { Hero } from './sections/Hero';
-import { BrandTicker, Pillars } from './sections/Pillars';
+import { StockistTicker, Pillars } from './sections/Pillars';
 import { CategoryIndex } from './sections/CategoryIndex';
 import { DealsRail } from './sections/DealsRail';
 import { SpiritOfMonth } from './sections/SpiritOfMonth';
@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <BrandTicker />
+      <StockistTicker />
       <Pillars />
       <CategoryIndex />
       <DealsRail />

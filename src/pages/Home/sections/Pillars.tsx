@@ -1,26 +1,27 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { PILLARS } from '../../../data/site';
-import { brands } from '../../../data';
+import { PILLARS, STOCKISTS } from '../../../data/site';
 import { Marquee } from '../../../components/Marquee/Marquee';
 import { Reveal, SplitHeading } from '../../../animations/Reveal';
 import './Pillars.css';
 
-export function BrandTicker() {
+/** “You can find us at:” — stockist & venue logos (replaces the brand-name ticker) */
+export function StockistTicker() {
   return (
-    <div className="ticker on-dark" aria-label="Brands on the shelf">
+    <section className="stockists" aria-labelledby="stockists-title">
+      <h2 id="stockists-title" className="stockists__title label">
+        You can find us at:
+      </h2>
       <Marquee
-        speed={45}
-        items={brands.map((b) => (
-          <Link key={b.handle} to={`/collections/${b.handle}`} className="ticker__item">
-            {b.name}
-            <span className="ticker__star" aria-hidden="true">
-              ✳
-            </span>
-          </Link>
+        speed={50}
+        className="stockists__marquee"
+        items={STOCKISTS.map((s) => (
+          <span key={s.name} className="stockists__tile" title={s.name}>
+            <img src={s.logo} alt={s.name} decoding="async" />
+          </span>
         ))}
       />
-    </div>
+    </section>
   );
 }
 
