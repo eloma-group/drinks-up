@@ -26,4 +26,22 @@ See `.env.example`. `VITE_SITE_URL` sets the canonical and Open Graph URLs. `VIT
 
 ## Deploying
 
-The site is a static SPA. `vercel.json` (Vercel) and `public/_redirects` (Netlify) rewrite every route to `index.html`.
+The site is a static single-page app. Run `npm run build` and upload the **contents** of `dist/` to the web root. Each host type has a config file that sends every URL to `index.html` so deep links and refreshes never return a 404:
+
+| Host | File (already included in `dist/`) |
+| --- | --- |
+| Apache / LiteSpeed (Hostinger, cPanel) | `.htaccess` |
+| IIS (Windows hosting, Plesk, Azure) | `web.config` (needs the IIS URL Rewrite module) |
+| Vercel | `vercel.json` |
+| Netlify | `_redirects` |
+
+All four serve real files (images, JS, CSS) as they are and send every other URL to the app.
+
+`.htaccess` and `web.config` also:
+- set correct MIME types for `.webp`, `.avif` and `.svg`;
+- return a real 404 for a missing file under `/assets`, `/brand`, `/payments` or `/stockists`, rather than the app shell;
+- cache hashed build files for a year and always revalidate `index.html`, so a new deploy shows up immediately.
+
+`vercel.json` sets the same cache headers for `/assets` and `index.html`. Vercel and Netlify set MIME types themselves.
+
+`.htaccess` does **not** force HTTPS. Turn that on in the host panel (Hostinger/cPanel "Force HTTPS" or Cloudflare); doing it in both places can cause redirect loops. The site must be deployed at the domain root, not in a subfolder.

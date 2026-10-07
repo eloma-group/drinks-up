@@ -1,0 +1,67 @@
+# ---------------------------------------------------------------------------
+# DrinksUp: Apache config (cPanel, Hostinger, any Apache/LiteSpeed host)
+# Upload the contents of dist/ to the web root; this file ships with it.
+# ---------------------------------------------------------------------------
+
+Options -MultiViews -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # HTTPS redirect is left to the host panel (Hostinger/cPanel "Force HTTPS" or
+  # Cloudflare). Doing it here as well can cause redirect loops behind a proxy.
+  # Only uncomment if the host has no such option:
+  # RewriteCond %{HTTPS} !=on
+  # RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Serve real files and folders as they are
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # A missing build asset should return a real 404, not the app shell
+  RewriteRule ^(assets|brand|payments|stockists)/ - [R=404,L]
+
+  # Everything else is a client-side route: let React Router handle it
+  # (/collections/..., /products/..., /blogs/recipes/..., /pages/..., /policies/..., /cart, /checkout)
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# If mod_rewrite is missing, unknown URLs still load the app instead of a server 404
+ErrorDocument 404 /index.html
+
+# Correct MIME types for modern assets
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType image/svg+xml .svg
+  AddType application/manifest+json .webmanifest
+  AddType font/woff2 .woff2
+  AddType text/javascript .js .mjs
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml text/plain
+</IfModule>
+
+# Caching: hashed build files (name-AbC123xy.js) are cached for a year,
+# unhashed images for a day, and index.html is always revalidated so new deploys show up immediately
+<IfModule mod_headers.c>
+  <FilesMatch "\.(png|jpe?g|webp|avif|svg|ico|txt)$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+  <FilesMatch "-[A-Za-z0-9_-]{8}\.(js|css|woff2?|png|jpe?g|webp|avif|svg)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
