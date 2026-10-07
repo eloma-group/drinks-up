@@ -19,11 +19,16 @@
   color: var(--ink);
   white-space: nowrap;
 }
+.stockists {
+  /* height a square logo gets; others scale to the same visual area */
+  --logo-size: clamp(2.9rem, 2.5rem + 1vw, 3.75rem);
+}
 .stockists__tile {
   position: relative;
   display: block;
-  height: clamp(2rem, 1.7rem + 0.8vw, 2.6rem);
-  width: clamp(4.5rem, 4rem + 1.6vw, 6.5rem);
+  flex: none;
+  height: calc(var(--logo-size) * var(--k, 1));
+  width: calc(var(--logo-size) * var(--k, 1) * var(--a, 1));
   margin-inline: clamp(1rem, 0.7rem + 1.2vw, 2.25rem);
 }
 /* small coral divider between logos */

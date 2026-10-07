@@ -71,20 +71,20 @@ export const IMG = {
 
 /** “You can find us at:” — venues & retailers from the store's homepage logo slider */
 export const STOCKISTS = [
-  { name: 'Savile Row', logo: '/stockists/savile-row.webp' },
-  { name: 'Foxtrot Unicorn', logo: '/stockists/foxtrot-unicorn.webp' },
-  { name: 'Crown', logo: '/stockists/crown.webp' },
-  { name: 'Howard Smith Wharves', logo: '/stockists/howard-smith-wharves.webp' },
-  { name: 'Arbory', logo: '/stockists/arbory.webp' },
-  { name: 'Gimlet', logo: '/stockists/gimlet.webp' },
-  { name: 'Naked for Satan', logo: '/stockists/naked-for-satan.webp' },
-  { name: 'Rockpool Bar & Grill', logo: '/stockists/rockpool-bar-grill.webp' },
-  { name: 'Maybe Sammy', logo: '/stockists/maybe-sammy.webp' },
-  { name: 'Liquor Barons', logo: '/stockists/liquor-barons.webp' },
-  { name: "Dan Murphy's", logo: '/stockists/dan-murphys.webp' },
-  { name: 'Australian Venue Co.', logo: '/stockists/australian-venue-co.webp' },
-  { name: 'Amazon', logo: '/stockists/amazon.webp' },
-  { name: 'Funlab', logo: '/stockists/funlab.webp' },
+  { name: 'Savile Row', logo: '/stockists/savile-row.webp', w: 127, h: 70 },
+  { name: 'Foxtrot Unicorn', logo: '/stockists/foxtrot-unicorn.webp', w: 110, h: 150, boost: 1.15 },
+  { name: 'Crown', logo: '/stockists/crown.webp', w: 104, h: 80 },
+  { name: 'Howard Smith Wharves', logo: '/stockists/howard-smith-wharves.webp', w: 106, h: 113 },
+  { name: 'Arbory', logo: '/stockists/arbory.webp', w: 143, h: 49 },
+  { name: 'Gimlet', logo: '/stockists/gimlet.webp', w: 150, h: 88 },
+  { name: 'Naked for Satan', logo: '/stockists/naked-for-satan.webp', w: 176, h: 178 },
+  { name: 'Rockpool Bar & Grill', logo: '/stockists/rockpool-bar-grill.webp', w: 150, h: 41 },
+  { name: 'Maybe Sammy', logo: '/stockists/maybe-sammy.webp', w: 480, h: 197 },
+  { name: 'Liquor Barons', logo: '/stockists/liquor-barons.webp', w: 132, h: 132, boost: 0.9 },
+  { name: "Dan Murphy's", logo: '/stockists/dan-murphys.webp', w: 94, h: 100, boost: 0.9 },
+  { name: 'Australian Venue Co.', logo: '/stockists/australian-venue-co.webp', w: 424, h: 234 },
+  { name: 'Amazon', logo: '/stockists/amazon.webp', w: 480, h: 147 },
+  { name: 'Funlab', logo: '/stockists/funlab.webp', w: 480, h: 232 },
 ] as const;
 
 /** The four promises from the original homepage slideshow */

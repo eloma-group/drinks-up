@@ -1,9 +1,20 @@
+import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { PILLARS, STOCKISTS } from '../../../data/site';
 import { Marquee } from '../../../components/Marquee/Marquee';
 import { Reveal, SplitHeading } from '../../../animations/Reveal';
 import './Pillars.css';
+
+/**
+ * Optical sizing: give every logo roughly the same visual area, so wide
+ * wordmarks get shorter and square badges get taller instead of tiny.
+ */
+function logoBox(s: { w: number; h: number; boost?: number }): CSSProperties {
+  const aspect = s.w / s.h;
+  const k = (1 / Math.sqrt(aspect)) * (s.boost ?? 1);
+  return { '--k': k.toFixed(3), '--a': aspect.toFixed(3) } as CSSProperties;
+}
 
 /** “You can find us at:” — stockist & venue logos (replaces the brand-name ticker) */
 export function StockistTicker() {
@@ -16,8 +27,8 @@ export function StockistTicker() {
         speed={50}
         className="stockists__marquee"
         items={STOCKISTS.map((s) => (
-          <span key={s.name} className="stockists__tile" title={s.name}>
-            <img src={s.logo} alt={s.name} decoding="async" />
+          <span key={s.name} className="stockists__tile" title={s.name} style={logoBox(s)}>
+            <img src={s.logo} alt={s.name} width={s.w} height={s.h} decoding="async" />
           </span>
         ))}
       />
