@@ -23,6 +23,27 @@ export function CategoryIndex() {
   const canHover = useCanHover();
   const mover = useRef<{ x: (v: number) => void; y: (v: number) => void } | null>(null);
 
+  // Row reveal — explicit end values so a re-run can never leave rows invisible
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      gsap.fromTo(
+        '.catidx__row',
+        { yPercent: 60, autoAlpha: 0 },
+        {
+          yPercent: 0,
+          autoAlpha: 1,
+          stagger: 0.08,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: ref.current, start: 'top 80%', once: true },
+        },
+      );
+    },
+    { scope: ref },
+  );
+
+  // Cursor-follow image (desktop only)
   useGSAP(
     () => {
       if (!floatRef.current) return;
@@ -30,17 +51,8 @@ export function CategoryIndex() {
         x: gsap.quickTo(floatRef.current, 'x', { duration: 0.6, ease: 'power3' }),
         y: gsap.quickTo(floatRef.current, 'y', { duration: 0.6, ease: 'power3' }),
       };
-      if (prefersReducedMotion()) return;
-      gsap.from('.catidx__row', {
-        yPercent: 60,
-        autoAlpha: 0,
-        stagger: 0.08,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.catidx__list', start: 'top 85%', once: true },
-      });
     },
-    { scope: ref, dependencies: [canHover] },
+    { scope: ref, dependencies: [canHover], revertOnUpdate: true },
   );
 
   const onMove = (e: React.MouseEvent) => {
