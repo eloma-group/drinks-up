@@ -20,6 +20,12 @@ npm run sync:catalogue   # re-pull products, prices, stock, recipes and policies
 - **Forms.** The contact form and the newsletter post to the store's existing Shopify `/contact` endpoint, so messages and sign-ups arrive exactly where they do today.
 - **Animation.** Lenis handles smooth scrolling and runs off GSAP's ticker. GSAP ScrollTrigger drives the reveals, parallax and the pinned deals rail. Framer Motion drives the drawers, overlays, page transitions and micro-interactions. When `prefers-reduced-motion` is set, all of these switch off.
 
+## TikTok section
+
+The homepage TikTok rail shows the @drinks_up_please feed from the old site (`src/data/tiktok.json`, with covers in `public/tiktok/`). Clicking a video opens TikTok's official player. If tiktok.com is blocked on the visitor's network (it is banned in India, for example), the popup says so and offers an "Open on TikTok" link instead of showing an empty frame.
+
+To play a video on the site itself, without depending on TikTok, save the clip as `public/tiktok/<video id>.mp4` and run `npm run import:tiktok <posts.json>`.
+
 ## Configuration
 
 See `.env.example`. `VITE_SITE_URL` sets the canonical and Open Graph URLs. `VITE_SHOPIFY_STORE_URL` points to the store that handles checkout, accounts and forms.

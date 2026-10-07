@@ -15,6 +15,72 @@ interface Post {
   likes: number;
   plays: number;
   cover: string;
+  /** Optional self-hosted MP4 (public/tiktok/<id>.mp4). Plays everywhere, even where TikTok is blocked. */
+  video?: string;
+}
+
+type Reach = 'checking' | 'ok' | 'blocked';
+
+/**
+ * TikTok's player only works where tiktok.com is reachable (it is blocked in
+ * some countries and on some work/school networks). Probe once with a tiny
+ * image request so we can show a helpful fallback instead of a dead frame.
+ */
+let reachCache: Promise<boolean> | null = null;
+function canReachTikTok(): Promise<boolean> {
+  reachCache ??= new Promise((resolve) => {
+    const img = new Image();
+    const t = window.setTimeout(() => resolve(false), 5000);
+    img.onload = () => {
+      window.clearTimeout(t);
+      resolve(true);
+    };
+    img.onerror = () => {
+      window.clearTimeout(t);
+      resolve(false);
+    };
+    img.src = `https://www.tiktok.com/favicon.ico?probe=${Date.now()}`;
+  });
+  return reachCache;
+}
+
+function Player({ post }: { post: Post }) {
+  const [reach, setReach] = useState<Reach>(post.video ? 'ok' : 'checking');
+  useEffect(() => {
+    if (post.video) return;
+    let alive = true;
+    canReachTikTok().then((ok) => alive && setReach(ok ? 'ok' : 'blocked'));
+    return () => {
+      alive = false;
+    };
+  }, [post.video]);
+
+  if (post.video) {
+    return <video src={post.video} poster={post.cover} controls autoPlay playsInline preload="metadata" />;
+  }
+  return (
+    <>
+      <img src={post.cover} alt="" className="tplayer__poster" />
+      {reach === 'checking' && <span className="tplayer__spinner" role="status" aria-label="Loading video" />}
+      {reach === 'ok' && (
+        <iframe
+          src={`https://www.tiktok.com/player/v1/${post.id}?autoplay=1&music_info=0&description=0&rel=0`}
+          title="TikTok video player"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+          allowFullScreen
+        />
+      )}
+      {reach === 'blocked' && (
+        <div className="tplayer__blocked on-dark" role="status">
+          <p className="h4">TikTok can’t load on this network</p>
+          <p>TikTok isn’t available here, so the video can’t play inside the site. Open it in the TikTok app or on another network.</p>
+          <a href={post.url} target="_blank" rel="noopener noreferrer" className="btn btn--light btn--md">
+            Open on TikTok <ArrowUpRight size={16} />
+          </a>
+        </div>
+      )}
+    </>
+  );
 }
 
 /** Captions use “fancy” Unicode letters (𝕍𝕒𝕟𝕚𝕝𝕝𝕒); NFKC turns them back into plain text */
@@ -151,14 +217,7 @@ export function TikTokFeed() {
                 <X size={22} />
               </button>
               <div className="tplayer__frame">
-                {/* Poster shows until TikTok's player loads (or if TikTok is unavailable on the network) */}
-                <img src={active.cover} alt="" className="tplayer__poster" />
-                <iframe
-                  src={`https://www.tiktok.com/player/v1/${active.id}?autoplay=1&music_info=0&description=0&rel=0`}
-                  title="TikTok video player"
-                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                  allowFullScreen
-                />
+                <Player key={active.id} post={active} />
               </div>
               <div className="tplayer__info">
                 <p className="tplayer__caption">{active.caption}</p>

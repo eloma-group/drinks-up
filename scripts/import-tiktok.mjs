@@ -9,8 +9,13 @@
  *
  * TikTok cover URLs are signed and expire, so covers are downloaded into
  * public/tiktok/ and the post data is written to src/data/tiktok.json.
+ *
+ * Videos play through TikTok's official player, which only works where
+ * tiktok.com is reachable. To play a clip everywhere, save it as
+ * public/tiktok/<video id>.mp4 and re-run this script.
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
 const [, , input] = process.argv;
@@ -66,6 +71,8 @@ print(round(mean))`,
     comments: p.commentsCount ?? 0,
     plays: p.extra?.playsCount ?? 0,
     cover: `/tiktok/${p.vendorId}.webp`,
+    // Drop the downloaded clip in as public/tiktok/<id>.mp4 to play it on-site, even where TikTok is blocked
+    ...(existsSync(`public/tiktok/${p.vendorId}.mp4`) ? { video: `/tiktok/${p.vendorId}.mp4` } : {}),
   });
 }
 
