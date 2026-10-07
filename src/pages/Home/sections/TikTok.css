@@ -1,0 +1,261 @@
+.tiktok {
+  overflow: hidden;
+}
+.tiktok__head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.tiktok__arrows {
+  display: none;
+  gap: 0.4rem;
+}
+.tiktok__arrows button {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 50%;
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease),
+    opacity 0.3s var(--ease);
+}
+.tiktok__arrows button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.tiktok__arrows button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.tiktok__follow {
+  gap: 0.55rem;
+}
+@media (min-width: 900px) {
+  .tiktok__arrows {
+    display: flex;
+  }
+}
+
+/* Rail (ul.… beats the global ul[role='list'] padding reset) */
+ul.tiktok__rail {
+  list-style: none;
+  margin: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(11.5rem, 9rem + 9vw, 19rem);
+  gap: var(--gap);
+  padding: 0.25rem var(--gutter) 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.tiktok__rail::-webkit-scrollbar {
+  display: none;
+}
+.tiktok__item {
+  scroll-snap-align: start;
+}
+
+/* Clip card */
+.tclip {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-align: left;
+  isolation: isolate;
+  background: var(--navy);
+}
+.tclip img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease);
+}
+.tclip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, rgb(25 29 51 / 0.92) 0%, rgb(25 29 51 / 0.2) 45%, transparent 70%);
+}
+.tclip__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--white);
+  transition:
+    transform 0.45s var(--ease),
+    background-color 0.3s var(--ease);
+}
+.tclip__play svg {
+  margin-left: 3px;
+}
+.tclip__meta {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+}
+.tclip__caption {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.tclip__stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgb(255 255 255 / 0.75);
+}
+.tclip__stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.tclip__stats time {
+  margin-left: auto;
+}
+@media (hover: hover) {
+  .tclip:hover img {
+    transform: scale(1.06);
+  }
+  .tclip:hover .tclip__play {
+    transform: scale(1.12);
+    background: var(--coral);
+    color: var(--ink);
+  }
+}
+@media (max-width: 599px) {
+  .tclip__caption {
+    -webkit-line-clamp: 2;
+    font-size: 0.8rem;
+  }
+  .tclip__play {
+    top: 40%;
+    width: 2.9rem;
+    height: 2.9rem;
+  }
+  .tclip__meta {
+    padding: 0.8rem;
+  }
+}
+.tclip:focus-visible {
+  outline: 3px solid var(--coral-deep);
+  outline-offset: 3px;
+}
+
+/* “More on TikTok” end card */
+.tclip--more {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: var(--cream);
+  color: var(--ink);
+  text-align: center;
+  border: 1.5px dashed var(--line-strong);
+  transition: background-color 0.3s var(--ease);
+}
+.tclip--more::after {
+  display: none;
+}
+.tclip--more:hover {
+  background: var(--sand);
+}
+.tclip__handle {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* Player modal */
+.tplayer {
+  position: fixed;
+  z-index: 90;
+  inset: 50% auto auto 50%;
+  translate: -50% -50%;
+  display: grid;
+  gap: 0.9rem;
+  width: min(92vw, calc((88dvh - 7rem) * 9 / 16));
+  max-width: 26rem;
+}
+.tplayer__close {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.75rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.3);
+}
+.tplayer__frame {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #000;
+}
+.tplayer__poster,
+.tplayer__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tplayer__poster {
+  object-fit: cover;
+  opacity: 0.6;
+}
+.tplayer__info {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
+  background: var(--paper);
+  font-size: var(--fs-small);
+}
+.tplayer__caption {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.tplayer__info .link-line {
+  justify-self: start;
+}

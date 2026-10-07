@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "sync:catalogue": "node scripts/fetch-catalogue.mjs"
+    "sync:catalogue": "node scripts/fetch-catalogue.mjs",
+    "import:tiktok": "node scripts/import-tiktok.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

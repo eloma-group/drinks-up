@@ -8,6 +8,7 @@ import { DealsRail } from './sections/DealsRail';
 import { SpiritOfMonth } from './sections/SpiritOfMonth';
 import { Bestsellers } from './sections/Bestsellers';
 import { BrandTiles } from './sections/Brands';
+import { TikTokFeed } from './sections/TikTok';
 import { Story } from './sections/Story';
 import { Benefits, RecipesTeaser } from './sections/RecipesTeaser';
 
@@ -44,6 +45,7 @@ export default function Home() {
       <SpiritOfMonth />
       <Bestsellers />
       <Story />
+      <TikTokFeed />
       <BrandTiles />
       <RecipesTeaser />
       <Benefits />
