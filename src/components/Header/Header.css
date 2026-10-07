@@ -78,9 +78,6 @@
 .header__nav a::after {
   bottom: 0.25rem;
 }
-.header__nav a.is-sale {
-  color: var(--coral-deep);
-}
 
 .header__tools {
   display: flex;

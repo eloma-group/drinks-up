@@ -151,7 +151,7 @@ export function Header() {
                   </li>
                 ) : (
                   <li key={item.to} onMouseEnter={closeMega}>
-                    <NavLink to={item.to} className={`link-line ${item.label === 'Sale' ? 'is-sale' : ''}`}>
+                    <NavLink to={item.to} className="link-line">
                       {item.label}
                     </NavLink>
                   </li>
