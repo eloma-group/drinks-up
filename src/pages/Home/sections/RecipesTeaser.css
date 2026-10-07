@@ -1,0 +1,43 @@
+.rteaser__grid {
+  list-style: none;
+  margin: 0;
+  display: grid;
+  gap: 2.5rem var(--gap);
+}
+@media (min-width: 760px) {
+  .rteaser__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .rteaser__grid > li:nth-child(2) {
+    margin-top: clamp(2rem, 4vw, 6rem);
+  }
+}
+
+.benefits {
+  padding-block: clamp(2.5rem, 2rem + 2vw, 4.5rem);
+}
+.benefits__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem var(--gap);
+}
+.benefits__list li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.benefits__list svg {
+  flex: none;
+  color: var(--coral-deep);
+}
+.benefits__list p {
+  font-size: var(--fs-small);
+  max-width: 36ch;
+}
+@media (min-width: 760px) {
+  .benefits__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

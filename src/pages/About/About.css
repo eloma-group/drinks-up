@@ -1,0 +1,104 @@
+.about__hero {
+  display: grid;
+  gap: 1.1rem;
+  padding-block: clamp(1.5rem, 1rem + 2vw, 3rem) clamp(2.5rem, 2rem + 3vw, 5rem);
+}
+.about__hero .label,
+.about__story .label {
+  color: var(--coral-deep);
+  margin-top: 1rem;
+}
+.about__banner {
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  max-height: 85svh;
+}
+@media (max-width: 700px) {
+  .about__banner {
+    aspect-ratio: 4 / 3;
+  }
+}
+.about__banner-img {
+  height: 116%;
+  margin-top: -8%;
+}
+.about__banner-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about__story {
+  display: grid;
+  gap: 1.5rem;
+}
+.about__statement {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 1rem + 3.4vw, 5.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+  text-wrap: balance;
+}
+.about__values {
+  display: grid;
+  gap: clamp(4rem, 3rem + 5vw, 10rem);
+  padding-bottom: var(--section);
+}
+.about__value {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+.about__value-img {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.about__value-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about__value-copy {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+}
+.about__num {
+  font-size: clamp(2.5rem, 2rem + 2vw, 4.5rem);
+  color: var(--coral-deep);
+  line-height: 1;
+}
+@media (min-width: 900px) {
+  .about__value {
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(3rem, 2rem + 4vw, 8rem);
+  }
+  .about__value.is-flip .about__value-img {
+    order: 2;
+  }
+}
+
+.about__social {
+  padding-block: clamp(2rem, 1.5rem + 2vw, 3.5rem) var(--section);
+}
+.about__tick {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 1rem + 3vw, 5rem);
+  text-transform: uppercase;
+  padding-right: 2rem;
+  white-space: nowrap;
+}
+.about__social-inner {
+  display: grid;
+  gap: 2rem;
+  padding-top: clamp(3rem, 2rem + 4vw, 7rem);
+}
+.about__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+}

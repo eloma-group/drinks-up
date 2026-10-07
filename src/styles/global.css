@@ -1,0 +1,419 @@
+/* ==========================================================================
+   DrinksUp — design tokens
+   Brand colours sampled from the original logo: navy #2b3252, coral #f96167
+   ========================================================================== */
+:root {
+  --ink: #191d33;
+  --navy: #2b3252;
+  --navy-soft: #3a4268;
+  --coral: #f96167;
+  --coral-deep: #c9343c; /* coral that passes AA as text on paper */
+  --coral-tint: #fde4e1;
+  --paper: #faf6f0;
+  --cream: #f3ebdf;
+  --sand: #e8dac6;
+  --sun: #f4b25e;
+  --white: #fff;
+  --muted: #5e6178;
+  --line: rgb(25 29 51 / 0.14);
+  --line-strong: rgb(25 29 51 / 0.32);
+  --line-light: rgb(255 255 255 / 0.18);
+
+  --font-display: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Fluid type — rem-based so browser zoom always scales it */
+  --fs-mega: clamp(3.6rem, 0.6rem + 12.5vw, 17rem);
+  --fs-display: clamp(2.8rem, 0.9rem + 7vw, 10rem);
+  --fs-h2: clamp(2.3rem, 1rem + 4.4vw, 6.8rem);
+  --fs-h3: clamp(1.45rem, 1rem + 1.4vw, 2.75rem);
+  --fs-h4: clamp(1.15rem, 1rem + 0.5vw, 1.6rem);
+  --fs-lead: clamp(1.06rem, 0.96rem + 0.42vw, 1.55rem);
+  --fs-body: clamp(0.97rem, 0.93rem + 0.16vw, 1.15rem);
+  --fs-small: clamp(0.84rem, 0.82rem + 0.08vw, 0.95rem);
+  --fs-label: clamp(0.7rem, 0.67rem + 0.1vw, 0.82rem);
+
+  --gutter: clamp(1rem, 0.4rem + 2.8vw, 4.5rem);
+  --section: clamp(4.5rem, 2.6rem + 7.5vw, 12rem);
+  --gap: clamp(0.75rem, 0.5rem + 1vw, 1.75rem);
+  --measure: 62ch;
+  --radius: 6px;
+  --radius-lg: clamp(10px, 0.5rem + 0.6vw, 22px);
+
+  --header-h: clamp(4rem, 3.6rem + 1vw, 5.25rem);
+  --bar-h: 2.25rem;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur: 0.5s;
+
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: auto;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+html.is-locked {
+  overflow: hidden;
+}
+html.is-locked body {
+  padding-right: var(--scrollbar-gap, 0);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+img {
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+ul,
+ol,
+figure,
+blockquote {
+  margin: 0;
+}
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+::selection {
+  background: var(--coral);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--coral-deep);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.on-dark :focus-visible {
+  outline-color: var(--coral);
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  padding: 0.75rem 1.1rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius);
+  transform: translateY(-200%);
+  transition: transform 0.3s var(--ease);
+}
+.skip-link:focus {
+  transform: none;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+.display,
+.h1,
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+.display {
+  font-size: var(--fs-display);
+}
+.h1 {
+  font-size: var(--fs-display);
+}
+.h2 {
+  font-size: var(--fs-h2);
+}
+.h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
+.h4 {
+  font-weight: 700;
+  font-size: var(--fs-h4);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.accent,
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+.display .accent,
+.h1 .accent,
+.h2 .accent {
+  font-size: 1.04em;
+  line-height: 0.8;
+  color: var(--coral-deep);
+  padding-right: 0.04em;
+}
+.on-dark .accent,
+.on-coral .accent {
+  color: inherit;
+}
+.on-dark .display .accent,
+.on-dark .h1 .accent,
+.on-dark .h2 .accent {
+  color: var(--coral);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+.label {
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.muted {
+  color: var(--muted);
+}
+.on-dark .muted {
+  color: rgb(255 255 255 / 0.68);
+}
+
+/* Split heading words */
+.split {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.split__inner {
+  display: inline-block;
+  transform-origin: 0 100%;
+  will-change: transform;
+}
+
+/* Rich text from the store editor */
+.prose {
+  max-width: var(--measure);
+  line-height: 1.7;
+}
+.prose > * + * {
+  margin-top: 1em;
+}
+.prose h3,
+.prose h4,
+.prose h5 {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 1.08em;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-top: 1.8em;
+}
+.prose h3:first-child {
+  margin-top: 0;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.2em;
+}
+.prose li + li {
+  margin-top: 0.35em;
+}
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--coral);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 2px;
+}
+.prose strong {
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+.wrap {
+  padding-inline: var(--gutter);
+}
+.section {
+  padding-block: var(--section);
+}
+.section--tight {
+  padding-block: calc(var(--section) * 0.6);
+}
+.on-dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+.on-coral {
+  background: var(--coral);
+  color: var(--ink);
+}
+.on-cream {
+  background: var(--cream);
+}
+
+.section-head {
+  display: grid;
+  gap: 1.25rem 3rem;
+  align-items: end;
+  margin-bottom: clamp(2rem, 1rem + 3vw, 4.5rem);
+}
+@media (min-width: 900px) {
+  .section-head {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+  .section-head > :last-child {
+    justify-self: end;
+    text-align: right;
+  }
+}
+.section-head .label {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-head .label::before {
+  content: '';
+  width: 2rem;
+  height: 2px;
+  background: currentColor;
+}
+
+/* Link with animated underline */
+.link-line {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-weight: 700;
+}
+.link-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.2em;
+  height: 2px;
+  background: currentColor;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease);
+}
+.link-line:hover::after,
+.link-line:focus-visible::after,
+.link-line[aria-current='page']::after {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+/* Shared image plate: white product shots melt into the warm background */
+.plate {
+  position: relative;
+  background: var(--cream);
+  overflow: hidden;
+}
+.plate > img.plate__product {
+  mix-blend-mode: multiply;
+}
+
+.page-enter {
+  min-height: 60vh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

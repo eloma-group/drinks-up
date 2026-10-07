@@ -1,0 +1,113 @@
+.mmenu {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.mmenu__top {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  min-height: var(--header-h);
+  justify-items: center;
+}
+.mmenu__close {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: -0.6rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+}
+.mmenu__spacer {
+  width: 2.75rem;
+}
+
+.mmenu__nav ul {
+  margin: 0;
+  display: grid;
+}
+.mmenu__nav li {
+  border-bottom: 1px solid var(--line-light);
+}
+.mmenu__nav a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 1.6rem + 5vw, 4.5rem);
+  line-height: 1;
+  text-transform: uppercase;
+  transition: color 0.3s var(--ease);
+}
+.mmenu__nav a:active,
+.mmenu__nav a:hover {
+  color: var(--coral);
+}
+.mmenu__idx {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgb(255 255 255 / 0.5);
+  letter-spacing: 0.1em;
+}
+
+.mmenu__shelf .label {
+  margin-bottom: 0.9rem;
+}
+.mmenu__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+}
+.mmenu__chips a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.6rem;
+  padding: 0.3rem 1rem;
+  border: 1px solid var(--line-light);
+  border-radius: 999px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+.mmenu__foot {
+  margin-top: auto;
+  display: grid;
+  gap: 1.25rem;
+}
+.mmenu__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.mmenu__actions .btn {
+  padding-inline: 0.75rem;
+  gap: 0.5rem;
+}
+.mmenu__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+.mmenu__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  margin: 0;
+  font-size: var(--fs-small);
+  color: rgb(255 255 255 / 0.72);
+}
+.mmenu__socials a {
+  display: inline-block;
+  padding-block: 0.35rem;
+}

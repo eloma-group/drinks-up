@@ -1,0 +1,129 @@
+.buybox {
+  display: grid;
+  gap: 1.5rem;
+}
+.buybox__price {
+  display: grid;
+  gap: 0.6rem;
+}
+.buybox__stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+.buybox__stock span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #2f9e6a;
+  box-shadow: 0 0 0 4px rgb(47 158 106 / 0.18);
+}
+.buybox__stock.is-out span {
+  background: var(--muted);
+  box-shadow: 0 0 0 4px rgb(94 97 120 / 0.15);
+}
+
+.buybox__options {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.buybox__options legend {
+  padding: 0;
+  margin-bottom: 0.75rem;
+}
+.buybox__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.9rem;
+  padding: 0.4rem 1.2rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+.swatch:hover {
+  border-color: var(--ink);
+}
+.swatch.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.swatch.is-out {
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+.swatch:has(input:focus-visible) {
+  outline: 2px solid var(--coral-deep);
+  outline-offset: 3px;
+}
+
+.buybox__row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem;
+}
+.buybox__add,
+.buybox__now {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: var(--fs-small);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.3s var(--ease),
+    transform 0.2s var(--ease);
+}
+.buybox__add {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+}
+.buybox__add:hover:not(:disabled) {
+  background: var(--navy);
+}
+.buybox__add:active,
+.buybox__now:active {
+  transform: scale(0.98);
+}
+.buybox__add:disabled {
+  background: rgb(25 29 51 / 0.3);
+  cursor: not-allowed;
+}
+.buybox__add-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.buybox__now {
+  background: var(--coral);
+  color: var(--ink);
+}
+.buybox__now:hover {
+  background: #ff777c;
+}
+@media (max-width: 359px) {
+  .buybox__row {
+    grid-template-columns: 1fr;
+  }
+}

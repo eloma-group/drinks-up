@@ -1,0 +1,34 @@
+.acc {
+  border-top: 1px solid var(--line-strong);
+}
+.acc__item {
+  border-bottom: 1px solid var(--line-strong);
+}
+.acc__item h3 {
+  font: inherit;
+}
+.acc__trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding-block: 1rem;
+  text-align: left;
+  font-weight: 800;
+  font-size: var(--fs-body);
+}
+.acc__icon {
+  flex: none;
+  transition: transform 0.45s var(--ease);
+}
+.is-open .acc__icon {
+  transform: rotate(45deg);
+}
+.acc__panel {
+  overflow: hidden;
+}
+.acc__content {
+  padding-bottom: 1.5rem;
+}

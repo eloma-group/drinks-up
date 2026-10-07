@@ -1,0 +1,154 @@
+.som {
+  padding-block: var(--section);
+  overflow: clip;
+}
+.som__grid {
+  display: grid;
+  gap: clamp(2.5rem, 1.5rem + 4vw, 6rem);
+}
+.som__visual {
+  position: relative;
+  align-self: start;
+}
+.som__photo {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  aspect-ratio: 4 / 5;
+}
+.som__parallax {
+  height: 118%;
+  margin-top: -9%;
+}
+.som__parallax img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.som__bottle {
+  position: absolute !important;
+  right: -4%;
+  bottom: -6%;
+  width: 42%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.6);
+}
+.som__bottle .pimg--contain {
+  padding: 8%;
+}
+.som__stamp {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: grid;
+  place-items: center;
+  width: clamp(5.5rem, 4.5rem + 3vw, 8.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--coral);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: clamp(0.85rem, 0.7rem + 0.5vw, 1.3rem);
+  line-height: 0.95;
+  rotate: -10deg;
+}
+
+.som__copy {
+  display: grid;
+  align-content: start;
+  gap: 1.25rem;
+}
+.som__kicker {
+  color: var(--coral);
+}
+.som__tag {
+  font-size: clamp(1.4rem, 1rem + 1.2vw, 2.4rem);
+  line-height: 1.1;
+}
+.som__reasons {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.som__reasons li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.som__reasons svg {
+  flex: none;
+  margin-top: 0.25em;
+  color: var(--coral);
+}
+
+.som__card {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: 1.25rem;
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  color: var(--ink);
+}
+.som__card .muted,
+.som__card .price__was {
+  color: var(--muted);
+}
+.som__card .price--sale .price__now {
+  color: var(--coral-deep);
+}
+.som__recipe {
+  display: grid;
+  gap: 0.75rem;
+}
+.som__recipe .label {
+  color: var(--coral-deep);
+}
+.som__recipe-cols {
+  display: grid;
+  gap: 1rem 2rem;
+  font-size: var(--fs-small);
+}
+.som__recipe-cols ul {
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 700;
+}
+.som__recipe-cols ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.4rem;
+}
+.som__more {
+  justify-self: start;
+  font-size: var(--fs-small);
+}
+
+@media (min-width: 700px) {
+  .som__recipe-cols {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+}
+@media (min-width: 1000px) {
+  .som__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+  .som__visual {
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+  }
+  .som__photo {
+    aspect-ratio: 4 / 5;
+    max-height: calc(100svh - var(--header-h) - 4rem);
+    width: 100%;
+  }
+}

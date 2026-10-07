@@ -1,0 +1,63 @@
+.news {
+  display: grid;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 36rem;
+}
+.news__field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  border-bottom: 2px solid currentColor;
+  transition: border-color 0.3s var(--ease);
+}
+.news__field.has-error {
+  border-color: var(--coral-deep);
+}
+.news--coral .news__field.has-error {
+  border-color: var(--ink);
+}
+.news input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: none;
+  padding: 0.85rem 0;
+  font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.75rem);
+  font-weight: 600;
+}
+.news input::placeholder {
+  color: currentColor;
+  opacity: 0.5;
+}
+.news input:focus {
+  outline: none;
+}
+.news__field:focus-within {
+  border-bottom-width: 3px;
+}
+.news button {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  transition: transform 0.4s var(--ease);
+}
+.news button:hover {
+  transform: translateX(4px);
+}
+.news--dark button {
+  background: var(--coral);
+  color: var(--ink);
+}
+.news__msg {
+  font-size: var(--fs-small);
+  opacity: 0.8;
+}
+.news__field.has-error + .news__msg {
+  opacity: 1;
+  font-weight: 700;
+}

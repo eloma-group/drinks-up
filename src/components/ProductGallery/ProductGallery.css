@@ -1,0 +1,124 @@
+.gallery {
+  display: grid;
+  gap: 0.75rem;
+}
+.gallery--empty {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+}
+.gallery__stage {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: calc(100svh - var(--header-h) - 3rem);
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+.gallery__frame {
+  position: absolute;
+  inset: 0;
+  transition: scale 0.4s var(--ease);
+}
+.gallery__stage .pimg--contain {
+  padding: 7% 10%;
+}
+.gallery__stage.is-zoomable {
+  cursor: zoom-in;
+}
+.gallery__stage.is-zoomed .gallery__frame {
+  scale: 1.9;
+}
+.gallery__hint {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: var(--paper);
+  font-size: 0.65rem;
+  opacity: 0.85;
+  transition: opacity 0.3s var(--ease);
+  pointer-events: none;
+}
+.gallery__stage.is-zoomed .gallery__hint {
+  opacity: 0;
+}
+.gallery__thumbs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.gallery__thumb {
+  flex: none;
+  width: clamp(4rem, 3rem + 2vw, 6rem);
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  transition: outline-color 0.25s var(--ease);
+}
+.gallery__thumb.is-active {
+  outline-color: var(--ink);
+}
+.gallery__thumb .pimg--contain {
+  padding: 8%;
+}
+
+@media (min-width: 1000px) {
+  .gallery:has(.gallery__thumbs) {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+  }
+  .gallery__thumbs {
+    flex-direction: column;
+    max-height: calc(100svh - var(--header-h) - 3rem);
+    overflow-y: auto;
+  }
+}
+
+/* Touch carousel */
+.gallery--touch {
+  margin-inline: calc(var(--gutter) * -1);
+}
+.gallery__rail {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.gallery__rail::-webkit-scrollbar {
+  display: none;
+}
+.gallery__slide {
+  flex: none;
+  width: 100%;
+  aspect-ratio: 1;
+  max-height: 72svh;
+  scroll-snap-align: center;
+}
+.gallery__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding-inline: var(--gutter);
+}
+.gallery__dots span:not(.gallery__counter) {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--line-strong);
+  transition:
+    width 0.4s var(--ease),
+    background-color 0.3s var(--ease);
+}
+.gallery__dots .is-active {
+  width: 1.4rem !important;
+  background: var(--ink) !important;
+}
+.gallery__counter {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+}

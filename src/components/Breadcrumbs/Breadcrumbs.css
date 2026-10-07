@@ -1,0 +1,29 @@
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.crumbs li + li::before {
+  content: '/';
+  margin-right: 0.35rem;
+  opacity: 0.5;
+}
+.crumbs a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.crumbs [aria-current] {
+  color: var(--ink);
+}
+.on-dark .crumbs ol {
+  color: rgb(255 255 255 / 0.6);
+}
+.on-dark .crumbs [aria-current],
+.on-dark .crumbs a:hover {
+  color: var(--paper);
+}

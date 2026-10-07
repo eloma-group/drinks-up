@@ -1,0 +1,26 @@
+.nf__hero {
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+  padding-block: clamp(2rem, 1rem + 4vw, 6rem) 0;
+}
+.nf__code {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(6rem, 3rem + 14vw, 20rem);
+  line-height: 0.8;
+  color: var(--coral);
+}
+.nf__hero .h1 {
+  max-width: 16ch;
+}
+.nf__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.nf__help a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
