@@ -107,10 +107,6 @@ export function Footer() {
         </p>
       </div>
 
-      <div className="footer__mark wrap" aria-hidden="true">
-        <img src="/brand/wordmark.png" alt="" width={1038} height={232} loading="lazy" />
-      </div>
-
       <div className="footer__base wrap">
         <p>© {year} Drinksup.com.au · Australian owned</p>
         <ul role="list" className="footer__pay" aria-label="Accepted payment methods">

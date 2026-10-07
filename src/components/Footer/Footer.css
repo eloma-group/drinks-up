@@ -89,6 +89,10 @@
   margin: 0;
 }
 
+.footer__warning {
+  padding-bottom: clamp(1.5rem, 1rem + 2vw, 3rem);
+  border-bottom: 1px solid var(--line-light);
+}
 .footer__warning p {
   max-width: 80rem;
   padding: 1.25rem 1.5rem;
@@ -103,15 +107,6 @@
   margin-right: 0.35rem;
 }
 
-.footer__mark {
-  padding-block: clamp(2.5rem, 1.5rem + 4vw, 6rem) 0;
-}
-.footer__mark img {
-  width: 100%;
-  height: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.95;
-}
 
 .footer__base {
   display: grid;
