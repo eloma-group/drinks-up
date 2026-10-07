@@ -61,7 +61,7 @@
 .footer__phone {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.35em;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(1.8rem, 1.2rem + 1.6vw, 3rem);
@@ -71,6 +71,25 @@
 }
 .footer__phone:hover {
   color: var(--coral);
+}
+/* Icon scales with the number instead of a fixed pixel size */
+.footer__phone-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 0.95em;
+  height: 0.95em;
+  border-radius: 50%;
+  background: var(--coral);
+  color: var(--ink);
+  transition: transform 0.4s var(--ease);
+}
+.footer__phone-icon svg {
+  width: 52%;
+  height: 52%;
+}
+.footer__phone:hover .footer__phone-icon {
+  transform: rotate(-12deg) scale(1.06);
 }
 .footer__info dl {
   margin: 0;

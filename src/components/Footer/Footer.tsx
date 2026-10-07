@@ -80,7 +80,10 @@ export function Footer() {
         <div className="footer__col footer__info">
           <h3 className="label muted">Information</h3>
           <a href={`tel:${SITE.phone}`} className="footer__phone">
-            <Phone size={18} /> {SITE.phoneDisplay}
+            <span className="footer__phone-icon" aria-hidden="true">
+              <Phone strokeWidth={2.25} />
+            </span>
+            {SITE.phoneDisplay}
           </a>
           <dl>
             <div>
