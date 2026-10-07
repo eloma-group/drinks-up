@@ -3,7 +3,7 @@ import { Check } from 'lucide-react';
 import { getProduct } from '../../../data';
 import { SPIRIT_OF_THE_MONTH as SOM } from '../../../data/site';
 import { shortTitle } from '../../../utils/format';
-import { ClipReveal, Parallax, Reveal, SplitHeading } from '../../../animations/Reveal';
+import { ClipReveal, Reveal, SplitHeading } from '../../../animations/Reveal';
 import { BuyBox } from '../../../components/BuyBox/BuyBox';
 import './SpiritOfMonth.css';
 
@@ -16,18 +16,17 @@ export function SpiritOfMonth() {
       <div className="som__grid wrap">
         <div className="som__visual">
           <ClipReveal className="som__photo">
-            <Parallax amount={14} className="som__parallax">
-              <img
-                src="/brand/burnt-ends-feature-1254.webp"
-                srcSet="/brand/burnt-ends-feature-800.webp 800w, /brand/burnt-ends-feature-1254.webp 1254w"
-                sizes="(min-width: 1000px) 45vw, 100vw"
-                alt="Burnt Ends Blended Whiskey bottle beside a glass of whiskey on ice, with oak barrel and barley"
-                width={1254}
-                height={1254}
-                loading="lazy"
-                decoding="async"
-              />
-            </Parallax>
+            <img
+              className="som__img"
+              src="/brand/burnt-ends-feature-1254.webp"
+              srcSet="/brand/burnt-ends-feature-800.webp 800w, /brand/burnt-ends-feature-1254.webp 1254w"
+              sizes="(min-width: 1000px) 45vw, 100vw"
+              alt="Burnt Ends Blended Whiskey bottle beside a glass of whiskey on ice, with oak barrel and barley"
+              width={1254}
+              height={1254}
+              loading="lazy"
+              decoding="async"
+            />
           </ClipReveal>
           <p className="som__stamp" aria-hidden="true">
             Spirit

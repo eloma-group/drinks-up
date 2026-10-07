@@ -15,11 +15,8 @@
   border-radius: var(--radius-lg);
   aspect-ratio: 1;
 }
-.som__parallax {
-  height: 118%;
-  margin-top: -9%;
-}
-.som__parallax img {
+.som__img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -134,8 +131,8 @@
     top: calc(var(--header-h) + 2rem);
   }
   .som__photo {
+    /* stay a perfect square, shrinking width (not height) on short screens */
     aspect-ratio: 1;
-    max-height: calc(100svh - var(--header-h) - 4rem);
-    width: 100%;
+    width: min(100%, calc(100svh - var(--header-h) - 4rem));
   }
 }
