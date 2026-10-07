@@ -9,14 +9,14 @@ import './Pillars.css';
 export function StockistTicker() {
   return (
     <section className="stockists" aria-labelledby="stockists-title">
-      <h2 id="stockists-title" className="stockists__title label">
+      <h2 id="stockists-title" className="stockists__title">
         You can find us at:
       </h2>
       <Marquee
         speed={50}
         className="stockists__marquee"
         items={STOCKISTS.map((s) => (
-          <span key={s.name} className="stockists__tile" title={s.name}>
+          <span key={s.name} className={`stockists__tile ${'light' in s ? 'stockists__tile--light' : ''}`} title={s.name}>
             <img src={s.logo} alt={s.name} decoding="async" />
           </span>
         ))}
