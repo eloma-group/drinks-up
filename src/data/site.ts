@@ -28,7 +28,17 @@ export const SITE = {
     { label: 'YouTube', href: 'https://www.youtube.com/@3two1_drinks' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/company/17929620/' },
   ],
-  payments: ['Visa', 'Mastercard', 'American Express', 'PayPal', 'Apple Pay', 'Google Pay', 'Shop Pay', 'Union Pay'],
+  /** Accepted at the Shopify checkout — logos are the store's own payment icons */
+  payments: [
+    { label: 'Visa', icon: '/payments/visa.svg' },
+    { label: 'Mastercard', icon: '/payments/mastercard.svg' },
+    { label: 'American Express', icon: '/payments/amex.svg' },
+    { label: 'PayPal', icon: '/payments/paypal.svg' },
+    { label: 'Apple Pay', icon: '/payments/apple-pay.svg' },
+    { label: 'Google Pay', icon: '/payments/google-pay.svg' },
+    { label: 'Shop Pay', icon: '/payments/shop-pay.svg' },
+    { label: 'UnionPay', icon: '/payments/unionpay.svg' },
+  ],
 } as const;
 
 export const IMG = {

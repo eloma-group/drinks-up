@@ -264,7 +264,9 @@ export default function Checkout() {
                       </p>
                       <ul role="list" className="footer__pay checkout__methods">
                         {SITE.payments.map((p) => (
-                          <li key={p}>{p}</li>
+                          <li key={p.label}>
+                            <img src={p.icon} alt={p.label} title={p.label} width={38} height={24} />
+                          </li>
                         ))}
                       </ul>
                     </div>

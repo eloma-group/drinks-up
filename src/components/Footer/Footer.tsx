@@ -111,7 +111,9 @@ export function Footer() {
         <p>© {year} Drinksup.com.au · Australian owned</p>
         <ul role="list" className="footer__pay" aria-label="Accepted payment methods">
           {SITE.payments.map((p) => (
-            <li key={p}>{p}</li>
+            <li key={p.label}>
+              <img src={p.icon} alt={p.label} title={p.label} width={38} height={24} loading="lazy" />
+            </li>
           ))}
         </ul>
         <button type="button" className="footer__top" onClick={() => scrollTo(0)}>
