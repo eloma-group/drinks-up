@@ -79,7 +79,7 @@ export const STOCKISTS = [
   { name: 'Gimlet', logo: '/stockists/gimlet.webp' },
   { name: 'Naked for Satan', logo: '/stockists/naked-for-satan.webp' },
   { name: 'Rockpool Bar & Grill', logo: '/stockists/rockpool-bar-grill.webp' },
-  { name: 'Maybe Sammy', logo: '/stockists/maybe-sammy.webp', light: true },
+  { name: 'Maybe Sammy', logo: '/stockists/maybe-sammy.webp' },
   { name: 'Liquor Barons', logo: '/stockists/liquor-barons.webp' },
   { name: "Dan Murphy's", logo: '/stockists/dan-murphys.webp' },
   { name: 'Australian Venue Co.', logo: '/stockists/australian-venue-co.webp' },

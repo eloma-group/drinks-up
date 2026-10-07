@@ -16,7 +16,7 @@ export function StockistTicker() {
         speed={50}
         className="stockists__marquee"
         items={STOCKISTS.map((s) => (
-          <span key={s.name} className={`stockists__tile ${'light' in s ? 'stockists__tile--light' : ''}`} title={s.name}>
+          <span key={s.name} className="stockists__tile" title={s.name}>
             <img src={s.logo} alt={s.name} decoding="async" />
           </span>
         ))}
