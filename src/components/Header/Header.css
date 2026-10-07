@@ -50,10 +50,11 @@
 }
 .logo img {
   width: auto;
-  height: clamp(1.45rem, 1.2rem + 0.7vw, 2.15rem);
+  height: clamp(2.9rem, 2.4rem + 1.1vw, 4rem);
+  transition: height 0.45s var(--ease);
 }
-.logo--light img {
-  filter: brightness(0) invert(1);
+.header.is-scrolled .logo img {
+  height: clamp(2.5rem, 2.2rem + 0.7vw, 3.2rem);
 }
 .header__logo {
   justify-self: center;

@@ -133,7 +133,7 @@ export default function Checkout() {
       <div className="checkout__grid">
         <div className="checkout__main wrap">
           <Link to="/" className="checkout__logo" aria-label="DrinksUp home">
-            <img src="/brand/wordmark.png" alt="" width={1038} height={232} />
+            <img src="/brand/logo-square.png" alt="" width={600} height={469} />
           </Link>
 
           <ol className="steps" aria-label="Checkout progress">
