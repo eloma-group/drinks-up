@@ -1,0 +1,260 @@
+html.age-locked,
+html.age-locked body {
+  overflow: hidden;
+}
+
+/* Blur the whole site behind the gate (works everywhere, unlike backdrop-filter alone) */
+.site {
+  transition: filter 0.7s var(--ease);
+}
+.site--gated {
+  filter: blur(14px) saturate(1.1);
+  pointer-events: none;
+  user-select: none;
+}
+
+.agegate {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: max(1rem, env(safe-area-inset-top)) var(--gutter) max(1rem, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* full-screen frosted blur over the site */
+  background: rgb(25 29 51 / 0.5);
+}
+
+/* soft coral/amber light behind the card */
+.agegate__glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(40rem 30rem at 20% 15%, rgb(249 97 103 / 0.35), transparent 60%),
+    radial-gradient(36rem 28rem at 85% 90%, rgb(244 178 94 / 0.28), transparent 60%);
+  animation: agegate-drift 14s ease-in-out infinite alternate;
+}
+@keyframes agegate-drift {
+  to {
+    transform: translate3d(2%, -2%, 0) scale(1.05);
+  }
+}
+
+.agegate__card {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: clamp(1rem, 0.8rem + 0.8vw, 1.5rem);
+  width: min(100%, 34rem);
+  padding: clamp(1.75rem, 1.2rem + 2.5vw, 3.25rem) clamp(1.25rem, 0.8rem + 2.5vw, 3rem);
+  border-radius: clamp(18px, 1rem + 1vw, 32px);
+  background: var(--paper);
+  color: var(--ink);
+  text-align: center;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.6) inset,
+    0 40px 120px -30px rgb(10 12 25 / 0.75);
+}
+/* coral accent bar on top of the card */
+.agegate__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4.5rem;
+  height: 4px;
+  translate: -50% 0;
+  border-radius: 0 0 4px 4px;
+  background: var(--coral);
+}
+
+.agegate__logo {
+  width: auto;
+  height: clamp(4.25rem, 3.5rem + 2.5vw, 6rem);
+}
+
+.agegate__body {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+  width: 100%;
+}
+.agegate__eyebrow {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--coral-tint);
+  color: var(--coral-deep);
+  font-size: var(--fs-label);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.agegate__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 1.6rem + 3vw, 3.75rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.agegate__title .accent {
+  display: block;
+  color: var(--coral-deep);
+  font-size: 1.02em;
+}
+.agegate__desc {
+  max-width: 28rem;
+  color: var(--muted);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+
+/* DOB inputs */
+.agegate__form {
+  display: grid;
+  gap: 0.9rem;
+  width: 100%;
+  margin-top: 0.4rem;
+}
+.agegate__dob {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.6fr;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.agegate__field {
+  display: grid;
+  gap: 0.35rem;
+  text-align: left;
+}
+.agegate__field span {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.agegate__field input {
+  width: 100%;
+  min-width: 0;
+  height: clamp(3.4rem, 3rem + 1vw, 4rem);
+  padding: 0 0.5rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--white);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 1.3rem + 0.9vw, 2.1rem);
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: var(--ink);
+  transition:
+    border-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+.agegate__field input::placeholder {
+  color: rgb(25 29 51 / 0.22);
+}
+.agegate__field input:focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 4px rgb(249 97 103 / 0.28);
+}
+.agegate__field input[aria-invalid='true'] {
+  border-color: var(--coral-deep);
+}
+.agegate__error {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--coral-deep);
+}
+
+.agegate__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 3.6rem;
+  padding: 0.35rem 0.4rem 0.35rem 1.5rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 800;
+  font-size: var(--fs-small);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.3s var(--ease),
+    transform 0.2s var(--ease);
+}
+.agegate__submit:hover {
+  background: var(--navy);
+}
+.agegate__submit:active {
+  transform: scale(0.98);
+}
+.agegate__submit-icon {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--coral);
+  color: var(--ink);
+  transition: transform 0.4s var(--ease);
+}
+.agegate__submit:hover .agegate__submit-icon {
+  transform: translateX(3px);
+}
+/* keep the label visually centred despite the icon on the right */
+.agegate__submit::before {
+  content: '';
+  width: 2.6rem;
+  margin-right: auto;
+}
+
+/* Denied */
+.agegate__denied-icon {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: var(--coral-tint);
+  color: var(--coral-deep);
+}
+.agegate__retry {
+  margin-top: 0.25rem;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-color: var(--coral);
+}
+
+.agegate__legal {
+  max-width: 30rem;
+  padding-top: clamp(0.9rem, 0.7rem + 0.5vw, 1.25rem);
+  border-top: 1px solid var(--line);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (max-width: 359px) {
+  .agegate__dob {
+    gap: 0.4rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .agegate__glow {
+    animation: none;
+  }
+}

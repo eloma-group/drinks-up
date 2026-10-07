@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, type RefObject } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState, type RefObject } from 'react';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SmoothScrollProvider, useSmoothScroll } from './context/SmoothScroll';
@@ -13,6 +13,7 @@ import { QuickView } from './components/QuickView/QuickView';
 import { Toasts } from './components/Toasts/Toasts';
 import { Footer } from './components/Footer/Footer';
 import { ErrorBoundary, PageLoader } from './components/States/States';
+import { AgeGate } from './components/AgeGate/AgeGate';
 import Home from './pages/Home/Home';
 import { SITE_LOCKED } from './config';
 
@@ -118,21 +119,28 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  // Age gate shows on every full page load (opening the site or reloading); not persisted on purpose
+  const [ageVerified, setAgeVerified] = useState(false);
+
   return (
     <SmoothScrollProvider>
       <CartProvider>
         <UIProvider>
-          <a href="#main" className="skip-link">
-            Skip to content
-          </a>
-          <Header />
-          <AnimatedRoutes />
-          <Footer />
-          <MobileMenu />
-          <SearchOverlay />
-          <CartDrawer />
-          <QuickView />
-          <Toasts />
+          {/* inert: the site behind the gate can't be focused, clicked or read until verified */}
+          <div className={`site ${ageVerified ? '' : 'site--gated'}`} inert={!ageVerified}>
+            <a href="#main" className="skip-link">
+              Skip to content
+            </a>
+            <Header />
+            <AnimatedRoutes />
+            <Footer />
+            <MobileMenu />
+            <SearchOverlay />
+            <CartDrawer />
+            <QuickView />
+            <Toasts />
+          </div>
+          <AnimatePresence>{!ageVerified && <AgeGate onVerified={() => setAgeVerified(true)} />}</AnimatePresence>
         </UIProvider>
       </CartProvider>
     </SmoothScrollProvider>
