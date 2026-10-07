@@ -13,7 +13,7 @@
 .som__photo {
   overflow: hidden;
   border-radius: var(--radius-lg);
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1;
 }
 .som__parallax {
   height: 118%;
@@ -147,7 +147,7 @@
     top: calc(var(--header-h) + 2rem);
   }
   .som__photo {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1;
     max-height: calc(100svh - var(--header-h) - 4rem);
     width: 100%;
   }
