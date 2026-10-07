@@ -1,9 +1,7 @@
 import { useRef } from 'react';
 import { ABOUT, IMG } from '../../../data/site';
 import { gsap, useGSAP } from '../../../animations/gsap';
-import { Reveal } from '../../../animations/Reveal';
 import { prefersReducedMotion } from '../../../hooks/useReducedMotion';
-import { Button } from '../../../components/Button/Button';
 import { Photo } from '../../../components/Photo';
 import './Story.css';
 
@@ -40,20 +38,6 @@ export function Story() {
           <p className="lead">{ABOUT.story}</p>
         </div>
       </div>
-      <Reveal className="story__values wrap" stagger={0.1}>
-        {ABOUT.values.map((v) => (
-          <div key={v.title} className="story__value">
-            <h3 className="h3">{v.title}</h3>
-            <p className="muted">{v.body}</p>
-          </div>
-        ))}
-        <div className="story__value story__value--cta">
-          <p className="serif story__social">{ABOUT.social}</p>
-          <Button to="/pages/about-us-1" variant="outline" arrow>
-            About DrinksUp
-          </Button>
-        </div>
-      </Reveal>
     </section>
   );
 }
