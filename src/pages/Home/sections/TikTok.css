@@ -1,5 +1,7 @@
 .tiktok {
   overflow: hidden;
+  /* the next section brings its own top spacing */
+  padding-bottom: clamp(1.5rem, 1rem + 1.5vw, 3rem);
 }
 .tiktok__head-actions {
   display: flex;
@@ -7,9 +9,30 @@
   align-items: center;
   gap: 0.75rem;
 }
+/* Bottom controls: progress + prev/next */
+.tiktok__controls {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+  margin-top: clamp(0.5rem, 0.3rem + 0.6vw, 1rem);
+}
+.tiktok__progress {
+  flex: 1;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+.tiktok__progress span {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
 .tiktok__arrows {
-  display: none;
-  gap: 0.4rem;
+  display: flex;
+  gap: 0.5rem;
 }
 .tiktok__arrows button {
   display: grid;
@@ -21,12 +44,17 @@
   transition:
     background-color 0.3s var(--ease),
     color 0.3s var(--ease),
-    opacity 0.3s var(--ease);
+    border-color 0.3s var(--ease),
+    opacity 0.3s var(--ease),
+    transform 0.2s var(--ease);
 }
 .tiktok__arrows button:hover:not(:disabled) {
   background: var(--ink);
   color: var(--paper);
   border-color: var(--ink);
+}
+.tiktok__arrows button:active:not(:disabled) {
+  transform: scale(0.94);
 }
 .tiktok__arrows button:disabled {
   opacity: 0.3;
@@ -34,11 +62,6 @@
 }
 .tiktok__follow {
   gap: 0.55rem;
-}
-@media (min-width: 900px) {
-  .tiktok__arrows {
-    display: flex;
-  }
 }
 
 /* Rail (ul.… beats the global ul[role='list'] padding reset) */
@@ -49,7 +72,7 @@ ul.tiktok__rail {
   grid-auto-flow: column;
   grid-auto-columns: clamp(11.5rem, 9rem + 9vw, 19rem);
   gap: var(--gap);
-  padding: 0.25rem var(--gutter) 1rem;
+  padding: 0.25rem var(--gutter) 0.75rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--gutter);
@@ -258,4 +281,9 @@ ul.tiktok__rail {
 }
 .tplayer__info .link-line {
   justify-self: start;
+}
+
+/* Tighter hand-off into the next section (The houses we pour) */
+.tiktok + .section {
+  padding-top: clamp(2.5rem, 1.6rem + 2.6vw, 5rem);
 }

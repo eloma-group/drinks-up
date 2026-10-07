@@ -37,6 +37,7 @@ export function TikTokFeed() {
   const railRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState<Post | null>(null);
   const [edge, setEdge] = useState({ start: true, end: false });
+  const [progress, setProgress] = useState(0);
   const { lock } = useSmoothScroll();
 
   useEffect(() => {
@@ -51,11 +52,21 @@ export function TikTokFeed() {
     const el = railRef.current;
     if (!el) return;
     setEdge({ start: el.scrollLeft < 8, end: el.scrollLeft + el.clientWidth > el.scrollWidth - 8 });
+    // share of the rail already seen (visible width counts as seen)
+    setProgress(Math.min(1, (el.scrollLeft + el.clientWidth) / el.scrollWidth));
   };
   const page = (dir: 1 | -1) => {
     const el = railRef.current;
     if (el) el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: 'smooth' });
   };
+
+  // initial progress once the rail has laid out
+  useEffect(() => {
+    updateEdges();
+    window.addEventListener('resize', updateEdges);
+    return () => window.removeEventListener('resize', updateEdges);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!posts.length) return null;
 
@@ -67,14 +78,6 @@ export function TikTokFeed() {
           <SplitHeading id="tiktok-title" className="h2" text="Shaken, stirred & posted" accent={['posted']} />
         </div>
         <div className="tiktok__head-actions">
-          <div className="tiktok__arrows">
-            <button type="button" onClick={() => page(-1)} disabled={edge.start} aria-label="Previous videos">
-              <ArrowLeft size={20} />
-            </button>
-            <button type="button" onClick={() => page(1)} disabled={edge.end} aria-label="Next videos">
-              <ArrowRight size={20} />
-            </button>
-          </div>
           <a href={profile.url} target="_blank" rel="noopener noreferrer" className="btn btn--ink btn--md tiktok__follow">
             <TikTokIcon /> Follow us
           </a>
@@ -115,6 +118,20 @@ export function TikTokFeed() {
           </a>
         </li>
       </ul>
+
+      <div className="tiktok__controls wrap">
+        <div className="tiktok__progress" aria-hidden="true">
+          <span style={{ transform: `scaleX(${progress})` }} />
+        </div>
+        <div className="tiktok__arrows">
+          <button type="button" onClick={() => page(-1)} disabled={edge.start} aria-label="Previous videos">
+            <ArrowLeft size={20} />
+          </button>
+          <button type="button" onClick={() => page(1)} disabled={edge.end} aria-label="Next videos">
+            <ArrowRight size={20} />
+          </button>
+        </div>
+      </div>
 
       <AnimatePresence>
         {active && (
