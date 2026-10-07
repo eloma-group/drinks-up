@@ -14,6 +14,9 @@ import { Toasts } from './components/Toasts/Toasts';
 import { Footer } from './components/Footer/Footer';
 import { ErrorBoundary, PageLoader } from './components/States/States';
 import Home from './pages/Home/Home';
+import { SITE_LOCKED } from './config';
+
+const ComingSoon = lazy(() => import('./pages/ComingSoon/ComingSoon'));
 
 const Collection = lazy(() => import('./pages/Collection/Collection'));
 const Product = lazy(() => import('./pages/Product/Product'));
@@ -80,6 +83,13 @@ function AnimatedRoutes() {
         >
           <ErrorBoundary>
             <Suspense fallback={<PageLoader />}>
+              {SITE_LOCKED ? (
+                /* Pre-launch: only the homepage is public. Every other route shows “Coming soon”. */
+                <Routes location={location}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="*" element={<ComingSoon />} />
+                </Routes>
+              ) : (
               <Routes location={location}>
                 <Route path="/" element={<Home />} />
                 <Route path="/collections" element={<Collections />} />
@@ -98,6 +108,7 @@ function AnimatedRoutes() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              )}
             </Suspense>
           </ErrorBoundary>
         </motion.div>
