@@ -141,8 +141,6 @@ export const BENEFITS = [
 /** “Spirit of the month” feature from the original homepage */
 export const SPIRIT_OF_THE_MONTH = {
   handle: 'burnt-ends',
-  /** Clean bottle shot to float over the mood photo */
-  packshot: 'Burntends.png',
   kicker: 'Southern smoke meets rye spice',
   reasons: [
     'Unique fusion of Tennessee whiskey & peat smoke',

@@ -5,13 +5,11 @@ import { SPIRIT_OF_THE_MONTH as SOM } from '../../../data/site';
 import { shortTitle } from '../../../utils/format';
 import { ClipReveal, Parallax, Reveal, SplitHeading } from '../../../animations/Reveal';
 import { BuyBox } from '../../../components/BuyBox/BuyBox';
-import { ProductImage, isPackshot } from '../../../components/ProductCard/ProductImage';
 import './SpiritOfMonth.css';
 
 export function SpiritOfMonth() {
   const product = getProduct(SOM.handle);
   if (!product) return null;
-  const packshot = product.images.find((i) => i.src.includes(SOM.packshot)) ?? product.images.find(isPackshot) ?? product.images[0];
 
   return (
     <section className="som on-dark" aria-labelledby="som-title">
@@ -31,11 +29,6 @@ export function SpiritOfMonth() {
               />
             </Parallax>
           </ClipReveal>
-          {packshot && (
-            <Parallax amount={-30} className="som__bottle plate">
-              <ProductImage image={packshot} alt={shortTitle(product.title)} sizes="(min-width: 1000px) 18vw, 40vw" />
-            </Parallax>
-          )}
           <p className="som__stamp" aria-hidden="true">
             Spirit
             <br />

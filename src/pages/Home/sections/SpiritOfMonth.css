@@ -24,19 +24,6 @@
   height: 100%;
   object-fit: cover;
 }
-.som__bottle {
-  position: absolute !important;
-  right: -4%;
-  bottom: -6%;
-  width: 42%;
-  aspect-ratio: 3 / 4;
-  border-radius: var(--radius-lg);
-  background: var(--paper);
-  box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.6);
-}
-.som__bottle .pimg--contain {
-  padding: 8%;
-}
 .som__stamp {
   position: absolute;
   top: 1rem;
