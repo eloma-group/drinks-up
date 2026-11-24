@@ -1,0 +1,357 @@
+{
+ "cuba-libre": {
+  "n": "Cuba Libre",
+  "b": "Black Tears",
+  "img": "bt_cuba",
+  "k": "Signature",
+  "d": "Black Tears’ own spec for the Havana classic. The lime is what makes it a Cuba Libre.",
+  "i": [
+   [
+    "Black Tears Dry Spiced",
+    "50 ml"
+   ],
+   [
+    "Fresh lime juice",
+    "10 ml"
+   ],
+   [
+    "Cola",
+    "150 ml"
+   ],
+   [
+    "Lime wedge",
+    "1"
+   ]
+  ],
+  "m": "Fill a highball with fresh cubed ice. Add the rum and lime, top slowly with cold cola and give it one or two gentle lifts with a bar spoon. Lime wedge.",
+  "shop": "black-tears-cuban-spiced-rum-700ml"
+ },
+ "havana-espresso": {
+  "n": "Havana Espresso",
+  "b": "Black Tears",
+  "img": "bt_ck",
+  "k": "Twist",
+  "d": "An Espresso Martini that finally tastes like rum.",
+  "i": [
+   [
+    "Black Tears",
+    "45 ml"
+   ],
+   [
+    "Cold-brew coffee",
+    "20 ml"
+   ],
+   [
+    "Coffee liqueur",
+    "15 ml"
+   ],
+   [
+    "Sugar syrup",
+    "5 ml"
+   ]
+  ],
+  "m": "Shake hard with cubed ice. Double strain into a chilled coupe. Three coffee beans.",
+  "shop": "black-tears-cuban-spiced-rum-700ml"
+ },
+ "smoked-manhattan": {
+  "n": "Smoked Manhattan",
+  "b": "Burnt Ends",
+  "img": "be_man",
+  "k": "Stirred",
+  "d": "The Manhattan, served in a hickory-smoked glass.",
+  "i": [
+   [
+    "Burnt Ends",
+    "60 ml"
+   ],
+   [
+    "Sweet vermouth",
+    "20 ml"
+   ],
+   [
+    "Mole bitters",
+    "2 dashes"
+   ],
+   [
+    "Hickory smoke",
+    "for the glass"
+   ]
+  ],
+  "m": "Smoke a chilled coupe with hickory. Stir the rest 30 turns over ice and strain into the smoked glass. Brandied cherry.",
+  "shop": "burnt-ends"
+ },
+ "burnt-ends-highball": {
+  "n": "Burnt Ends Highball",
+  "b": "Burnt Ends",
+  "img": "be_high",
+  "k": "Highball",
+  "d": "Whiskey and premium soda with a charred lemon peel.",
+  "i": [
+   [
+    "Burnt Ends",
+    "50 ml"
+   ],
+   [
+    "Premium soda",
+    "150 ml"
+   ],
+   [
+    "Charred lemon peel",
+    "1"
+   ]
+  ],
+  "m": "Build over cubes in a highball glass.",
+  "shop": "burnt-ends"
+ },
+ "smoke-signal": {
+  "n": "Smoke Signal",
+  "b": "Burnt Ends",
+  "img": "be_sour",
+  "k": "Sour",
+  "d": "A sour twist that lets the char run through.",
+  "i": [
+   [
+    "Burnt Ends",
+    "45 ml"
+   ],
+   [
+    "Lemon juice",
+    "22.5 ml"
+   ],
+   [
+    "Honey syrup (3:1)",
+    "15 ml"
+   ],
+   [
+    "Egg white",
+    "1"
+   ]
+  ],
+  "m": "Dry shake. Shake again with ice. Double strain into a coupe.",
+  "shop": "burnt-ends"
+ },
+ "tommys-margarita": {
+  "n": "Tommy’s Margarita",
+  "b": "Pueblo Viejo",
+  "img": "pv_sea",
+  "k": "Signature",
+  "d": "The bartender’s margarita. Pueblo Viejo Blanco built right.",
+  "i": [
+   [
+    "Pueblo Viejo Blanco",
+    "60 ml"
+   ],
+   [
+    "Fresh lime juice",
+    "30 ml"
+   ],
+   [
+    "Agave nectar (2:1)",
+    "15 ml"
+   ]
+  ],
+  "m": "Shake with ice. Strain over fresh ice in a rocks glass. Optional salt half-rim.",
+  "shop": "pueblo-viejo-tequila-blanco"
+ },
+ "san-matias-old-fashioned": {
+  "n": "San Matías Old Fashioned",
+  "b": "San Matías",
+  "img": "sm_of",
+  "k": "Stirred",
+  "d": "Gran Reserva, stirred with agave and mole bitters.",
+  "i": [
+   [
+    "San Matías Gran Reserva",
+    "50 ml"
+   ],
+   [
+    "Agave syrup (1:1)",
+    "5 ml"
+   ],
+   [
+    "Mole bitters",
+    "2 dashes"
+   ],
+   [
+    "Orange peel",
+    "1"
+   ]
+  ],
+  "m": "Stir down over ice. Strain into a rocks glass.",
+  "shop": "san-matias-tequila-gran-reserva"
+ },
+ "pisco-sour": {
+  "n": "Pisco Sour",
+  "b": "Demonio de los Andes",
+  "img": "dm_sour",
+  "k": "Signature",
+  "d": "Peru’s national cocktail, built on the Acholado.",
+  "i": [
+   [
+    "Demonio de los Andes Acholado",
+    "60 ml"
+   ],
+   [
+    "Fresh lime juice",
+    "20 ml"
+   ],
+   [
+    "Sugar syrup",
+    "20 ml"
+   ],
+   [
+    "Egg white",
+    "1"
+   ],
+   [
+    "Angostura bitters",
+    "a few drops"
+   ]
+  ],
+  "m": "Shake hard over ice for the foam. Strain into a coupe and finish with a few drops of Angostura.",
+  "shop": "demonio-de-los-andes-pisco-acholado-700ml"
+ },
+ "chilcano": {
+  "n": "Chilcano",
+  "b": "Demonio de los Andes",
+  "img": "dm_cap",
+  "k": "Highball",
+  "d": "Pisco and ginger ale: the easy, quick-build highball.",
+  "i": [
+   [
+    "Demonio de los Andes Acholado",
+    "60 ml"
+   ],
+   [
+    "Fresh lime juice",
+    "15 ml"
+   ],
+   [
+    "Chilled ginger ale",
+    "120–150 ml"
+   ],
+   [
+    "Angostura bitters",
+    "2–3 drops"
+   ]
+  ],
+  "m": "Build over ice in a highball glass. Top slowly with ginger ale and stir once. Lime wheel.",
+  "shop": "demonio-de-los-andes-pisco-acholado-700ml"
+ },
+ "caipirinha": {
+  "n": "Caipirinha",
+  "b": "Thoquino",
+  "img": "th_caip",
+  "k": "Signature",
+  "d": "Brazil’s national cocktail, made with fresh-cane cachaça.",
+  "i": [
+   [
+    "Thoquino Cachaça",
+    "60 ml"
+   ],
+   [
+    "Fresh lime",
+    "1, in wedges"
+   ],
+   [
+    "White sugar",
+    "4 tsp"
+   ],
+   [
+    "Crushed ice",
+    "fill"
+   ]
+  ],
+  "m": "Muddle the lime with the sugar in a rocks glass. Add Thoquino and crushed ice and build.",
+  "shop": "toquinho-cachaca-100-sugar-cane-700ml"
+ },
+ "batida-de-coco": {
+  "n": "Batida de Coco",
+  "b": "Thoquino",
+  "img": "th_coco",
+  "k": "Creamy",
+  "d": "Cachaça shaken with coconut and condensed milk.",
+  "i": [
+   [
+    "Thoquino Cachaça",
+    "50 ml"
+   ],
+   [
+    "Coconut milk",
+    "50 ml"
+   ],
+   [
+    "Condensed milk",
+    "20 ml"
+   ],
+   [
+    "Crushed ice",
+    "fill"
+   ]
+  ],
+  "m": "Blend, or shake hard. Serve in a rocks glass.",
+  "shop": "toquinho-cachaca-100-sugar-cane-700ml"
+ },
+ "paloma": {
+  "n": "Paloma",
+  "b": "Pueblo Viejo",
+  "img": "pv_paloma",
+  "k": "Highball",
+  "d": "The Reposado paloma: grapefruit, lime and a pinch of salt.",
+  "i": [
+   [
+    "Pueblo Viejo Reposado",
+    "45 ml"
+   ],
+   [
+    "Fresh pink grapefruit juice",
+    "60 ml"
+   ],
+   [
+    "Lime juice",
+    "10 ml"
+   ],
+   [
+    "Salt",
+    "pinch"
+   ],
+   [
+    "Soda",
+    "top"
+   ]
+  ],
+  "m": "Build over ice in a highball glass. Top with soda.",
+  "shop": "pueblo-viejo-tequila-reposado"
+ },
+ "mango-smoothie": {
+  "n": "Mango Smoothie",
+  "b": "Giffard",
+  "img": "s_mangop",
+  "k": "Zero-proof",
+  "d": "Thick, sunny and alcohol-free: Giffard Fruit for Mix Mango blended with yoghurt and milk.",
+  "i": [
+   [
+    "Giffard Fruit for Mix Mango",
+    "60 ml"
+   ],
+   [
+    "Giffard Mango Syrup",
+    "10 ml"
+   ],
+   [
+    "Natural yoghurt",
+    "60 ml"
+   ],
+   [
+    "Cold milk",
+    "120 ml"
+   ],
+   [
+    "Ice",
+    "1 cup"
+   ]
+  ],
+  "m": "Add everything to a blender and blend until smooth. Pour into a chilled highball and garnish with a slice of fresh mango.",
+  "shop": "giffard-mango-fruit-for-mix-1000ml"
+ }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "drinksup",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Drinks Up e-commerce — storefront (frontend/), admin dashboard (admin/), API (backend/), PostgreSQL (database/)",
+  "scripts": {
+    "install:all": "npm --prefix database install && npm --prefix backend install && npm --prefix frontend install && npm --prefix admin install",
+    "dev": "concurrently -k -n db,api,store,admin -c blue,green,magenta,cyan \"npm --prefix database run dev\" \"wait-on tcp:5433 && npm --prefix backend run serve:dev\" \"npm --prefix frontend run dev\" \"npm --prefix admin run dev\"",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build && npm --prefix admin run build",
+    "db:reset": "npm --prefix database run reset:dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5",
+    "wait-on": "^8.0.5"
+  }
+}

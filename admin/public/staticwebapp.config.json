@@ -1,0 +1,7 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/thumbs/*", "/assets/*", "/login.webp", "/favicon.svg"]
+  },
+  "mimeTypes": { ".webp": "image/webp" }
+}
