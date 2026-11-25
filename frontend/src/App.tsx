@@ -3,7 +3,9 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import { useStore } from './lib/store'
 import { CATINFO, full } from './lib/data'
 import { initReveal, startLoop } from './lib/motion'
+import { PREVIEW } from './lib/api'
 import { CartDrawer, Footer, Gate, Modal, Nav, SearchOverlay, Toast } from './components/Layout'
+import { Locked } from './components/ui'
 import Home from './pages/Home'
 import Shop from './pages/Shop'
 import ProductPage from './pages/Product'
@@ -42,7 +44,7 @@ export default function App() {
 
   useLayoutEffect(() => {
     setSearchOpen(false)
-    document.body.classList.toggle('in-co', a === 'checkout')
+    document.body.classList.toggle('in-co', a === 'checkout' && !PREVIEW)
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
   }, [loc.pathname]) // eslint-disable-line
 
@@ -55,7 +57,7 @@ export default function App() {
     <>
       <Gate />
       <Nav />
-      {!a ? <Home key="home" /> : <main id="page" key={loc.pathname}>{loaded || STATIC.has(a) ? <Pages /> : null}</main>}
+      {!a ? <Home key="home" /> : <main id="page" key={loc.pathname}>{PREVIEW ? <Locked /> : loaded || STATIC.has(a) ? <Pages /> : null}</main>}
       <Footer />
       <div className="progress" id="progress" />
       <CartDrawer />

@@ -968,3 +968,9 @@ h1 .wi,h2 .wi{padding-bottom:.2em;margin-bottom:-.2em}
 /* design preview — features that need the backend */
 .soon{display:flex;flex-direction:column;gap:2px;background:var(--beige);border-left:3px solid var(--rose5);border-radius:8px;padding:12px 16px;margin:4px 0 12px;font-size:.86rem;line-height:1.45;color:var(--brown2);text-align:left}
 .soon b{font-family:var(--d);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:.95rem;color:var(--rose7)}
+.locked{min-height:72vh;display:grid;place-items:center;padding:170px 0 110px;text-align:center;background:radial-gradient(ellipse at 50% 30%,var(--beige),var(--cream) 70%)}
+.locked .wrap{display:flex;flex-direction:column;align-items:center;gap:18px}
+.locked .lk-ic{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--grad);color:#fff;box-shadow:0 18px 40px -14px rgba(180,31,82,.55)}
+.locked .lk-ic svg{width:38px;height:38px}
+.locked h1{font-size:clamp(3rem,8vw,6rem)}
+.locked p{max-width:440px;color:var(--muted);font-size:1.02rem;margin-bottom:8px}

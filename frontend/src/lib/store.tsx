@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { PREVIEW, getCatalog } from './api'
+import { PREVIEW, SOON, getCatalog } from './api'
 import { setFree } from './data'
 import { full, type Product, type Recipe } from './data'
 import { fly } from './motion'
@@ -85,20 +85,26 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const count = Object.values(cart).reduce((a, b) => a + b, 0)
   const sub = Object.entries(cart).reduce((a, [h, q]) => a + (byH[h]?.p || 0) * q, 0)
 
+  // design preview: only the homepage is open — cart, wishlist, search and quick views show "coming soon"
+  const soon = useCallback(() => toast(SOON), [toast])
+
   const add = useCallback((h: string, el?: Element | null, q = 1) => {
+    if (PREVIEW) { soon(); return }
     const p = byH[h]; if (!p || !p.ok) return
     setCartS(c => ({ ...c, [h]: (c[h] || 0) + q }))
     toast(full(p) + ' added to cart'); fly(p, el || null)
-  }, [byH, toast])
+  }, [byH, toast, soon])
   const addMany = useCallback((hs: string[], el?: Element | null) => {
+    if (PREVIEW) { soon(); return }
     setCartS(c => { const n = { ...c }; hs.forEach(h => (n[h] = (n[h] || 0) + 1)); return n })
     toast(hs.length + ' items added to cart'); if (hs[0] && byH[hs[0]]) fly(byH[hs[0]], el || null)
-  }, [byH, toast])
+  }, [byH, toast, soon])
   const qty = useCallback((h: string, d: number) => setCartS(c => { const n = { ...c }; n[h] = (n[h] || 0) + d; if (n[h] <= 0) delete n[h]; return n }), [])
   const wl = useCallback((h: string) => {
+    if (PREVIEW) { soon(); return }
     if (wish.includes(h)) { toast('Removed from wishlist'); setWish(w => w.filter(x => x !== h)) }
     else { toast(full(byH[h]) + ' saved to wishlist'); setWish(w => (w.includes(h) ? w : [...w, h])) }
-  }, [byH, toast, wish])
+  }, [byH, toast, wish, soon])
   const toWish = useCallback((h: string) => {
     setWish(w => (w.includes(h) ? w : [...w, h])); setCartS(c => { const n = { ...c }; delete n[h]; return n }); toast('Saved for later')
   }, [toast])
@@ -106,8 +112,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const v: Store = {
     loaded, failed, products, recipes, byH, cart, wish, recent, count, sub, add, addMany, qty, setCart: setCartS, wl, toWish, pushRecent,
-    drawer, openCart: () => setDrawer(true), closeCart: () => setDrawer(false),
-    toast, toastMsg, toastOn, modal, setModal, searchOpen, setSearchOpen, F, setF, fKey, bumpF: () => setFKey(k => k + 1),
+    drawer, openCart: () => (PREVIEW ? soon() : setDrawer(true)), closeCart: () => setDrawer(false),
+    toast, toastMsg, toastOn, modal, setModal: m => (PREVIEW && m ? soon() : setModal(m)),
+    searchOpen, setSearchOpen: b => (PREVIEW && b ? soon() : setSearchOpen(b)), F, setF, fKey, bumpF: () => setFKey(k => k + 1),
   }
   return <Ctx.Provider value={v}>{children}</Ctx.Provider>
 }
