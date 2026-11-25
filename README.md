@@ -5,7 +5,7 @@
 | `frontend/` | Customer storefront (exact port of the DrinksUp website mockup) | React 19, TypeScript, Vite, React Router | Static Web App |
 | `admin/` | Admin dashboard (port of the admin mockup, Drinks Up branding) | React 19, TypeScript, Vite, React Router | Static Web App |
 | `backend/` | REST API | Node 22, Express 5, TypeScript, zod, JWT | App Service (Linux) |
-| `database/` | Schema, seed data, local dev database | PostgreSQL 16 | Azure Database for PostgreSQL Flexible Server |
+| `database/` | Schema, seed data, local dev database | PostgreSQL 18 | Azure Database for PostgreSQL Flexible Server |
 | `infra/` | Infrastructure as code + deploy script | Bicep, Azure CLI | — |
 | `docs/API.md` | API contract shared by all three apps | | |
 
@@ -56,7 +56,7 @@ Requirements: [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cl
 
 `infra/main.bicep` creates, in its own resource group `drinksup-ecommerce-rg` (separate from any other web app — the script refuses to deploy into an existing group it did not create):
 
-* Azure Database for PostgreSQL Flexible Server (Burstable B1ms, PG 16, 7-day backups), database `drinksup`
+* Azure Database for PostgreSQL Flexible Server (Burstable B1ms, PG 18, 7-day backups), database `drinksup`
 * App Service plan (Linux B1) + Web App for the API (Node 22, health check `/api/health`, HTTPS only)
 * Two Static Web Apps (Standard) — storefront and admin (SPA routing via `staticwebapp.config.json`)
 * Storage account with a public `product-images` blob container for admin uploads

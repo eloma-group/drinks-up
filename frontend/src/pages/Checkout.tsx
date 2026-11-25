@@ -2,8 +2,8 @@ import { useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useStore } from '../lib/store'
 import { FREE, STATES, STORE, delivery, money } from '../lib/data'
-import { createOrder, login, register, validateDiscount, type Customer } from '../lib/api'
-import { ArrowSvg, Cta, LockSvg, LogoMark, Split, Thumb } from '../components/ui'
+import { PREVIEW, SOON, createOrder, login, register, validateDiscount, type Customer } from '../lib/api'
+import { ArrowSvg, Cta, LockSvg, LogoMark, Soon, Split, Thumb } from '../components/ui'
 
 export function Checkout() {
   const { cart, byH, count, sub, setCart } = useStore()
@@ -14,6 +14,7 @@ export function Checkout() {
   const [err, setErr] = useState('')
   const [btn, setBtn] = useState('')
   const [bad, setBad] = useState<Set<string>>(new Set())
+  const [soon, setSoon] = useState(false)
   const discRef = useRef<HTMLInputElement>(null)
 
   if (!items.length) return <section className="phead"><div className="wrap"><Split as="h1" text="Checkout" /><div className="none"><h3>Your cart is empty</h3><p>Add something to your cart to check out.</p><Cta to="/shop" cls="lg">Shop all products</Cta></div></div></section>
@@ -26,7 +27,7 @@ export function Checkout() {
     const v = (discRef.current?.value || '').trim().toUpperCase()
     if (!v) { setDisc(''); setDmsg(null); return }
     validateDiscount(v).then(r => { if (r.valid) { setDisc(r.code || v); setDmsg({ ok: true, code: r.code || v }) } else { setDisc(''); setDmsg({ ok: false, code: v, reason: r.reason }) } })
-      .catch(() => { setDisc(''); setDmsg({ ok: false, code: v }) })
+      .catch(() => { setDisc(''); setDmsg({ ok: false, code: v, reason: PREVIEW ? SOON : undefined }) })
   }
 
   const pay = (e: FormEvent<HTMLFormElement>) => {
@@ -38,6 +39,7 @@ export function Checkout() {
     setBad(new Set(badEls.map(i => i.name)))
     if (badEls.length) { setErr('Please complete the highlighted fields.'); badEls[0].focus(); return }
     setErr('')
+    if (PREVIEW) { setSoon(true); return }
     const d = new FormData(f)
     const g = (k: string) => String(d.get(k) || '').trim()
     setBtn('Opening secure payment…')
@@ -56,7 +58,7 @@ export function Checkout() {
       <div className="co-top"><Link className="logo" to="/"><LogoMark /></Link><ol className="steps"><li className="done"><Link to="/cart">Cart</Link></li><li className="on">Details</li><li>Payment</li></ol><span className="secure"><LockSvg />Secure checkout</span></div>
       <div className="co-g">
         <form className="co-form" id="coform" onSubmit={pay} noValidate>
-          <div className="express"><small>Express checkout</small><div className="xb"><a className="x shop" href={permalink()}>shop<b>Pay</b></a><a className="x pp" href={permalink()}><b>Pay</b>Pal</a><a className="x gp" href={permalink()}>G Pay</a></div><div className="or"><span>or continue below</span></div></div>
+          <div className="express"><small>Express checkout</small><div className="xb">{([['x shop', <>shop<b>Pay</b></>], ['x pp', <><b>Pay</b>Pal</>], ['x gp', 'G Pay']] as const).map(([c, l]) => <a key={c} className={c} href={PREVIEW ? '#' : permalink()} onClick={PREVIEW ? e => { e.preventDefault(); setSoon(true) } : undefined}>{l}</a>)}</div>{PREVIEW && soon ? <Soon /> : null}<div className="or"><span>or continue below</span></div></div>
           <fieldset><legend><span>1</span>Contact</legend>
             <label className={cls('email')}><input name="email" type="email" required placeholder=" " autoComplete="email" /><span>Email address</span></label>
             <label className="fl"><input name="phone" type="tel" placeholder=" " autoComplete="tel" /><span>Mobile (for delivery updates)</span></label>
@@ -80,6 +82,7 @@ export function Checkout() {
             <p className="secnote"><LockSvg />Payment details are entered on our encrypted payment page, powered by Shopify. We never see or store your card number.</p></fieldset>
           <label className={`chk age${bad.has('age') ? ' bad' : ''}`}><input type="checkbox" name="age" required /> I confirm I am 18 years or older and agree to the <Link to="/policy/terms">terms of sale</Link> and <Link to="/policy/returns">returns policy</Link>.</label>
           <div className="err" id="coerr">{err}</div>
+          {PREVIEW && soon ? <Soon /> : null}
           <button className="cta lg co-pay" type="submit"><i><ArrowSvg /></i><span>{btn || `Continue to secure payment — ${money(sub)}`}</span></button>
           <Link className="back" to="/cart">‹ Return to cart</Link>
         </form>
@@ -106,7 +109,9 @@ function AccForm({ kind }: { kind: 'in' | 'up' }) {
   const [busy, setBusy] = useState(false)
   const [reset, setReset] = useState(false)
   const submit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); setErr(''); setBusy(true)
+    e.preventDefault(); setErr('')
+    if (PREVIEW) { setErr(SOON); return }
+    setBusy(true)
     const d = new FormData(e.currentTarget); const g = (k: string) => String(d.get(k) || '').trim()
     const p = kind === 'in' ? login({ email: g('email'), password: String(d.get('password') || '') })
       : register({ first: g('first'), last: g('last'), email: g('email'), password: String(d.get('password') || ''), news: d.get('news') === 'on' })
@@ -118,8 +123,9 @@ function AccForm({ kind }: { kind: 'in' | 'up' }) {
   return kind === 'in' ? (
     <form className="acard rv" onSubmit={submit}><h3>Sign in</h3><p>Track orders, reorder favourites and check out faster.</p>
       <label>Email<input type="email" name="email" required autoComplete="email" /></label><label>Password<input type="password" name="password" required autoComplete="current-password" /></label>
-      <a className="lk" href="/account" onClick={e => { e.preventDefault(); setReset(true) }}>{reset ? 'Reset link sent to your email ✓' : 'Forgot your password?'}</a>
-      {err ? <p className="err">{err}</p> : null}
+      <a className="lk" href="/account" onClick={e => { e.preventDefault(); setReset(true) }}>{reset && !PREVIEW ? 'Reset link sent to your email ✓' : 'Forgot your password?'}</a>
+      {reset && PREVIEW ? <Soon /> : null}
+      {err ? err === SOON ? <Soon /> : <p className="err">{err}</p> : null}
       <button className="cta lg" type="submit" disabled={busy}><i><ArrowSvg /></i><span>Sign in</span></button></form>
   ) : (
     <form className="acard rv d1" onSubmit={submit}><h3>Create account</h3><p>Join for VIP deals, new recipes and early access to releases.</p>
@@ -127,7 +133,7 @@ function AccForm({ kind }: { kind: 'in' | 'up' }) {
       <label>Email<input type="email" name="email" required /></label><label>Password<input type="password" name="password" required minLength={6} /></label>
       <label className="chk"><input type="checkbox" required /> I confirm I am 18 years or older</label>
       <label className="chk"><input type="checkbox" name="news" defaultChecked /> Email me recipes and offers</label>
-      {err ? <p className="err">{err}</p> : null}
+      {err ? err === SOON ? <Soon /> : <p className="err">{err}</p> : null}
       <button className="cta lg" type="submit" disabled={busy}><i><ArrowSvg /></i><span>Create account</span></button></form>
   )
 }

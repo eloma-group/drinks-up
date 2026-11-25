@@ -2,9 +2,9 @@ import { useState, type FormEvent } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useStore } from '../lib/store'
 import { FAQ, HOUSES, POL, POL_URL, STORE, money, src } from '../lib/data'
-import { sendContact } from '../lib/api'
+import { PREVIEW, SOON, sendContact } from '../lib/api'
 import Card, { RecCard } from '../components/Card'
-import { ArrowSvg, Cta, ShipBar, Split, Thumb } from '../components/ui'
+import { ArrowSvg, Cta, ShipBar, Soon, Split, Thumb } from '../components/ui'
 
 export function Recipes() {
   const { recipes } = useStore()
@@ -38,7 +38,9 @@ export function Contact() {
   const [err, setErr] = useState('')
   const [busy, setBusy] = useState(false)
   const submit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); setErr(''); setBusy(true)
+    e.preventDefault(); setErr('')
+    if (PREVIEW) { setErr(SOON); return }
+    setBusy(true)
     const d = Object.fromEntries(new FormData(e.currentTarget))
     sendContact(d).then(() => setSent(true)).catch(x => setErr(x.message || 'Something went wrong — please try again.')).finally(() => setBusy(false))
   }
@@ -53,7 +55,7 @@ export function Contact() {
             <label>Name<input required name="name" /></label><label>Email<input required type="email" name="email" /></label><label>Phone<input name="phone" /></label>
             <label>Topic<select name="topic"><option>Product question</option><option>Order &amp; shipping</option><option>Gifting &amp; corporate</option><option>Something else</option></select></label>
             <label>Message<textarea required rows={5} name="message" /></label>
-            {err ? <p className="err">{err}</p> : null}
+            {err ? err === SOON ? <Soon /> : <p className="err">{err}</p> : null}
             <button className="cta lg" type="submit" disabled={busy}><i><ArrowSvg /></i><span>Send message</span></button></>}
         </form></div></div></section>
   )
@@ -107,9 +109,9 @@ export function Policy() {
   return (
     <section className="phead"><div className="wrap"><div className="crumb"><Link to="/">Home</Link><span>/</span>Help<span>/</span>{p.t}</div>
       <div className="pol-g"><aside className="pol-nav">{Object.entries(POL).map(([kk, v]) => <Link key={kk} className={kk === k ? 'on' : ''} to={`/policy/${kk}`}>{v.t}</Link>)}<Link to="/contact">Contact us</Link></aside>
-        <div><Split as="h1" text={p.t} /><p className="rv pol-lead">The key points, in plain English. The full legal policy is available from our store.</p>
+        <div><Split as="h1" text={p.t} /><p className="rv pol-lead">The key points, in plain English.{PREVIEW ? '' : ' The full legal policy is available from our store.'}</p>
           <div className="pol-list">{p.k.map(([h, b], i) => <div className="rv" key={h}><span>{String(i + 1).padStart(2, '0')}</span><div><h3>{h}</h3><p>{b}</p></div></div>)}</div>
           <div className="pol-help rv"><div><h3>Still have a question?</h3><p>Call <a href="tel:0400242381">0400 242 381</a> or send us a message.</p></div><Cta to="/contact">Contact us</Cta></div>
-          <p className="fine">Read the <a href={`${STORE}/policies/${POL_URL[k] || 'shipping-policy'}`} target="_blank" rel="noopener">full legal {p.t.toLowerCase()}</a>.</p></div></div></div></section>
+          {PREVIEW ? null : <p className="fine">Read the <a href={`${STORE}/policies/${POL_URL[k] || 'shipping-policy'}`} target="_blank" rel="noopener">full legal {p.t.toLowerCase()}</a>.</p>}</div></div></div></section>
   )
 }

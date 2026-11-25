@@ -44,7 +44,7 @@ resource pg 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
   location: location
   sku: { name: 'Standard_B1ms', tier: 'Burstable' }
   properties: {
-    version: '16'
+    version: '18'
     administratorLogin: pgAdminUser
     administratorLoginPassword: pgAdminPassword
     storage: { storageSizeGB: 32, autoGrow: 'Enabled' }

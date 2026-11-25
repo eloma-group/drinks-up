@@ -2,7 +2,17 @@ import type { Product, Recipe, Review } from './data'
 
 const BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 
+/**
+ * Design preview: a production build made without VITE_API_URL (e.g. the storefront deployed on its own before the
+ * backend exists). The catalogue is read from the bundled seed data and every feature that needs the backend
+ * (checkout, accounts, reviews, contact, discounts) shows a "coming soon" message instead of calling the API.
+ * Set VITE_PREVIEW=true to try it locally with `npm run dev`.
+ */
+export const PREVIEW = import.meta.env.VITE_PREVIEW === 'true' || (import.meta.env.PROD && !BASE)
+export const SOON = 'Coming soon — this will be available once our online store setup is complete.'
+
 export async function api<T>(path: string, init?: { method?: string; body?: unknown }): Promise<T> {
+  if (PREVIEW) throw new Error(SOON)
   const res = await fetch(BASE + '/api' + path, {
     method: init?.method || (init?.body ? 'POST' : 'GET'),
     headers: init?.body ? { 'Content-Type': 'application/json' } : undefined,
@@ -14,7 +24,16 @@ export async function api<T>(path: string, init?: { method?: string; body?: unkn
   return data as T
 }
 
-export const getCatalog = () => api<{ products: Product[]; recipes: Record<string, Recipe>; settings?: { freeShip: number; stdRate: number } }>('/catalog')
+type Catalog = { products: Product[]; recipes: Record<string, Recipe>; settings?: { freeShip: number; stdRate: number } }
+
+/** Bundled catalogue for the design preview — the same files the database is seeded from. */
+async function previewCatalog(): Promise<Catalog> {
+  const [p, r] = await Promise.all([import('../../../database/seed/data/products.json'), import('../../../database/seed/data/recipes.json')])
+  const products = (p.default as unknown as Omit<Product, 'rating'>[]).map(x => ({ ...x, rating: { avg: 0, n: 0 } }) as Product)
+  return { products, recipes: r.default as unknown as Record<string, Recipe> }
+}
+
+export const getCatalog = () => (PREVIEW ? previewCatalog() : api<Catalog>('/catalog'))
 export const getReviews = (h: string) => api<Review[]>(`/products/${encodeURIComponent(h)}/reviews`)
 export const postReview = (h: string, body: { n: string; city: string; r: number; t: string; b: string }) =>
   api<{ review: Review }>(`/products/${encodeURIComponent(h)}/reviews`, { body })

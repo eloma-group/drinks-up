@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { getCatalog } from './api'
+import { PREVIEW, getCatalog } from './api'
 import { setFree } from './data'
 import { full, type Product, type Recipe } from './data'
 import { fly } from './motion'
@@ -59,6 +59,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       setProducts(d.products); setRecipes(d.recipes); setLoaded(true); setFailed(false)
     }).catch(() => { if (!alive) return; setFailed(true); timer = window.setTimeout(go, 4000) })
     go()
+    if (PREVIEW) return () => { alive = false; clearTimeout(timer) } // bundled catalogue: nothing to refresh
     // keep prices, stock and drafts in sync with admin edits: refresh when the tab regains focus, and every 2 minutes
     const onVis = () => { if (document.visibilityState === 'visible' && Date.now() - last > 30_000) go() }
     document.addEventListener('visibilitychange', onVis)

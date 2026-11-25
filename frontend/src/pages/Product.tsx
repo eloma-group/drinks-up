@@ -2,9 +2,9 @@ import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useStore } from '../lib/store'
 import { CATS, SAMPLE_REVIEWS, STORE, delivery, fmtD, full, money, save, src, typeOf, type Product, type Review } from '../lib/data'
-import { getReviews, postHelpful, postReview, sendContact } from '../lib/api'
+import { PREVIEW, SOON, getReviews, postHelpful, postReview, sendContact } from '../lib/api'
 import Card, { RecCard } from '../components/Card'
-import { ArrowSvg, Cta, HeartSvg, PlusSvg, ShipBar, Split, Stars, Thumb } from '../components/ui'
+import { ArrowSvg, Cta, HeartSvg, PlusSvg, ShipBar, Soon, Split, Stars, Thumb } from '../components/ui'
 
 function fbtFor(P: Product[], p: Product) {
   const pool = P.filter(x => x.ok && x.h !== p.h)
@@ -35,7 +35,9 @@ export default function ProductPage() {
   const [picked, setPicked] = useState(false)
   const [helped, setHelped] = useState<Record<number, boolean>>({})
   const [notified, setNotified] = useState(false)
+  const [rvSoon, setRvSoon] = useState(false)
   const notify = async () => {
+    if (PREVIEW) { toast(SOON); return }
     let saved = ''
     try { saved = JSON.parse(localStorage.getItem('du_customer') || 'null')?.em || '' } catch { /* ignore */ }
     const email = (prompt('Your email — we’ll let you know when it’s back in stock', saved) || '').trim()
@@ -53,6 +55,7 @@ export default function ProductPage() {
   useEffect(() => { if (p) pushRecent(h) }, [h, !!p]) // eslint-disable-line
   useEffect(() => {
     let alive = true
+    if (PREVIEW) return
     getReviews(h).then(r => { if (alive) setReviews(r) }).catch(() => { /* keep empty */ })
     return () => { alive = false }
   }, [h])
@@ -82,10 +85,11 @@ export default function ProductPage() {
   shown.sort(rvSort === 'new' ? (a, b) => +new Date(b.d) - +new Date(a.d) : rvSort === 'hi' ? (a, b) => b.r - a.r : rvSort === 'lo' ? (a, b) => a.r - b.r : (a, b) => b.help - a.help)
 
   const fbtSel = fbt.filter(x => !fbtOff[x.h])
-  const shareUrl = STORE + '/products/' + p.h
+  const shareUrl = PREVIEW ? `${location.origin}/product/${p.h}` : STORE + '/products/' + p.h
 
   const submitReview = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (PREVIEW) { setRvSoon(true); return }
     const d = new FormData(e.currentTarget)
     const body = { n: String(d.get('n') || ''), city: String(d.get('city') || ''), r: picked ? pickN : 5, t: String(d.get('t') || ''), b: String(d.get('b') || '') }
     const local: Review = { id: -Date.now(), ...body, d: new Date().toISOString(), v: false, help: 0 }
@@ -179,6 +183,7 @@ export default function ProductPage() {
               <label>Title<input name="t" required maxLength={60} /></label>
               <label>Review<textarea name="b" rows={4} required /></label>
               <div className="two"><label>Name<input name="n" required maxLength={30} /></label><label>Location<input name="city" placeholder="e.g. Sydney NSW" /></label></div>
+              {rvSoon ? <Soon /> : null}
               <button className="cta" type="submit"><i><ArrowSvg /></i><span>Submit review</span></button>
             </form>
             <div className="rv-bar"><span>{rvStar ? <>Showing {rvStar}★ reviews · <button onClick={() => setRvStar(0)}>Show all</button></> : `${rt.n} reviews`}</span>

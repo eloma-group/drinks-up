@@ -964,3 +964,7 @@ h1 .wi,h2 .wi{padding-bottom:.2em;margin-bottom:-.2em}
 .cta-grid{display:grid;grid-template-columns:repeat(2,max-content);gap:12px}
 .cta-grid .cta{width:100%}.cta-grid .cta span{flex:1}
 @media (max-width:620px){.cta-grid{grid-template-columns:1fr}}
+
+/* design preview — features that need the backend */
+.soon{display:flex;flex-direction:column;gap:2px;background:var(--beige);border-left:3px solid var(--rose5);border-radius:8px;padding:12px 16px;margin:4px 0 12px;font-size:.86rem;line-height:1.45;color:var(--brown2);text-align:left}
+.soon b{font-family:var(--d);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:.95rem;color:var(--rose7)}

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStore } from '../lib/store'
 import { LINEUP, MQ, SHELF_CATS, src } from '../lib/data'
-import { getFeaturedReviews, type FeaturedReview } from '../lib/api'
+import { PREVIEW, getFeaturedReviews, type FeaturedReview } from '../lib/api'
 import { slide, slider } from '../lib/motion'
 import { gateState } from '../components/Layout'
 import Card from '../components/Card'
@@ -53,7 +53,7 @@ export default function Home() {
       document.querySelector('.hero h1')?.classList.add('in')
       const st = document.getElementById('stage'); if (st && document.body.classList.contains('ready')) st.classList.add('live')
     }
-    getFeaturedReviews().then(setRevs).catch(() => {})
+    if (!PREVIEW) getFeaturedReviews().then(setRevs).catch(() => {})
   }, [])
 
   // reviews carousel: only shown once real customer reviews exist

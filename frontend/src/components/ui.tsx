@@ -2,6 +2,7 @@ import { Fragment, useLayoutEffect, useRef, type CSSProperties, type ElementType
 import { Link } from 'react-router-dom'
 import { useStore } from '../lib/store'
 import { FREE, money, src, type Product } from '../lib/data'
+import { SOON } from '../lib/api'
 
 /* word / char split heading — renders the same .w > .wi structure the mockup builds at runtime */
 type SplitProps = { as?: ElementType; text: string; base?: number; chars?: boolean; className?: string; style?: CSSProperties; id?: string }
@@ -79,3 +80,8 @@ export function ShipBar() {
     </div>
   )
 }
+
+/** Shown wherever a feature needs the backend while the storefront runs as a design preview. */
+export const Soon = ({ cls = '' }: { cls?: string }) => (
+  <p className={`soon ${cls}`} role="status"><b>Coming soon</b>{SOON.replace(/^Coming soon — /, '')}</p>
+)
